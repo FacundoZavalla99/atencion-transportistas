@@ -1,0 +1,8 @@
+# Nunca subir credenciales, exportes de n8n con datos reales ni archivos locales
+.env
+*.env
+credentials*.json
+*_con_credenciales.json
+.DS_Store
+Thumbs.db
+__pycache__/

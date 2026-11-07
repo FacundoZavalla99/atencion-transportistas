@@ -1,0 +1,249 @@
+{
+ "name": "Entrega final - API de cargas",
+ "nodes": [
+  {
+   "id": "5b487b72-b186-430d-ad9c-11680c4d53df",
+   "name": "POST /cargas",
+   "type": "n8n-nodes-base.webhook",
+   "typeVersion": 2,
+   "position": [
+    0,
+    0
+   ],
+   "webhookId": "36f9439b-070b-4e07-90cc-b75b41e70dd2",
+   "parameters": {
+    "httpMethod": "POST",
+    "path": "cargas",
+    "authentication": "headerAuth",
+    "responseMode": "responseNode",
+    "options": {}
+   }
+  },
+  {
+   "id": "39e19fae-a210-4020-adb9-2006bd2a5fec",
+   "name": "Validar pedido",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    220,
+    0
+   ],
+   "parameters": {
+    "jsCode": "// Valida el pedido antes de tocar la planilla.\n// Esperamos {\"remitos\": [...]} con entre 1 y 500 números.\nconst body = $json.body || {};\nconst remitos = body.remitos;\nif (!Array.isArray(remitos) || remitos.length === 0) {\n  return [{ json: { valido: false, status: 400, error: 'Falta la lista \"remitos\" o está vacía.' } }];\n}\nif (remitos.length > 500) {\n  return [{ json: { valido: false, status: 400, error: 'Máximo 500 remitos por pedido.' } }];\n}\n// Cada remito puede venir solo (\"0003-123\") o con datos para la búsqueda aproximada\n// ({remito, id_transportista, fecha_viaje}).\nconst lista = remitos.map(r => (typeof r === 'object' && r !== null) ? r : { remito: String(r) });\nif (lista.some(r => !r.remito)) {\n  return [{ json: { valido: false, status: 400, error: 'Hay elementos sin \"remito\".' } }];\n}\nreturn [{ json: { valido: true, remitos: lista } }];\n"
+   }
+  },
+  {
+   "id": "a5e7dbc9-5be8-46c3-9d38-4eb4b79942a6",
+   "name": "¿Pedido válido?",
+   "type": "n8n-nodes-base.if",
+   "typeVersion": 2.2,
+   "position": [
+    440,
+    0
+   ],
+   "parameters": {
+    "conditions": {
+     "options": {
+      "caseSensitive": true,
+      "leftValue": "",
+      "typeValidation": "strict",
+      "version": 2
+     },
+     "conditions": [
+      {
+       "id": "d2225bbb-29b3-4675-9102-f303fa02a856",
+       "leftValue": "={{ $json.valido }}",
+       "rightValue": true,
+       "operator": {
+        "type": "boolean",
+        "operation": "true",
+        "singleValue": true
+       }
+      }
+     ],
+     "combinator": "and"
+    },
+    "options": {}
+   }
+  },
+  {
+   "id": "a2f8348f-a3e4-49c4-99d6-5dfbbf4d7387",
+   "name": "Leer cargas",
+   "type": "n8n-nodes-base.googleSheets",
+   "typeVersion": 4.5,
+   "position": [
+    660,
+    -100
+   ],
+   "onError": "continueErrorOutput",
+   "parameters": {
+    "documentId": {
+     "__rl": true,
+     "mode": "id",
+     "value": "TU_ID_PLANILLA_CARGAS"
+    },
+    "sheetName": {
+     "__rl": true,
+     "mode": "name",
+     "value": "Cargas"
+    },
+    "options": {}
+   }
+  },
+  {
+   "id": "a0e0f16a-3db9-425e-8b63-c87038aa11ef",
+   "name": "Buscar remitos",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    880,
+    -160
+   ],
+   "parameters": {
+    "jsCode": "// Cruza los remitos pedidos contra la hoja Cargas.\n// Se compara por número normalizado (solo dígitos, sin ceros adelante), como en la P2.\nconst norm = s => String(s ?? '').replace(/\\D/g, '').replace(/^0+/, '');\nconst cargas = $input.all().map(i => i.json).filter(c => c.id_carga);\nconst porRemito = {};\nfor (const c of cargas) (porRemito[norm(c.remito_ctg)] ??= []).push(c);\n\nconst pedidos = $('Validar pedido').first().json.remitos;\nconst dias = (a, b) => Math.abs(Date.parse(a) - Date.parse(b)) / 864e5;\nconst resultados = pedidos.map(p => {\n  const r = p.remito;\n  const lista = porRemito[norm(r)] || [];\n  let estado = 'No encontrada';\n  if (lista.length > 1) estado = 'Múltiples cargas';\n  else if (lista.length === 1) estado = lista[0].estado;   // Disponible | Facturada\n  return {\n    remito: r,\n    remito_norm: norm(r),\n    estado,\n    cargas: lista.map(c => ({\n      id_carga: c.id_carga,\n      id_transportista: c.id_transportista,\n      fecha_viaje: c.fecha_viaje,\n      estado: c.estado,\n      id_factura_que_la_uso: c.id_factura_que_la_uso || null,\n    })),\n    // Búsqueda aproximada: solo si no apareció y nos dijeron transportista y fecha.\n    // Cargas disponibles del mismo transportista con hasta 2 días de diferencia.\n    similares: (lista.length === 0 && p.id_transportista && p.fecha_viaje)\n      ? cargas.filter(c => c.estado === 'Disponible' && c.id_transportista === p.id_transportista\n                        && dias(c.fecha_viaje, p.fecha_viaje) <= 2)\n              .map(c => ({ id_carga: c.id_carga, remito_ctg: c.remito_ctg, fecha_viaje: c.fecha_viaje }))\n      : [],\n  };\n});\nreturn [{ json: { consultados: pedidos.length, encontrados: resultados.filter(x => x.cargas.length).length, resultados } }];\n"
+   }
+  },
+  {
+   "id": "e11e5899-975c-4e49-9c70-a6f855ef07be",
+   "name": "Responder 200",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "typeVersion": 1.1,
+   "position": [
+    1100,
+    -160
+   ],
+   "parameters": {
+    "respondWith": "json",
+    "responseBody": "={{ $json }}",
+    "options": {
+     "responseCode": 200
+    }
+   }
+  },
+  {
+   "id": "f3de9553-5247-4a33-80f3-941f52dd1f1f",
+   "name": "Responder 503",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "typeVersion": 1.1,
+   "position": [
+    880,
+    20
+   ],
+   "parameters": {
+    "respondWith": "json",
+    "responseBody": "={{ { error: 'El sistema de cargas no está disponible. Reintentar más tarde.' } }}",
+    "options": {
+     "responseCode": 503
+    }
+   }
+  },
+  {
+   "id": "c2b94d12-0b80-4ad3-88d4-fdddcd78c19e",
+   "name": "Responder 400",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "typeVersion": 1.1,
+   "position": [
+    660,
+    140
+   ],
+   "parameters": {
+    "respondWith": "json",
+    "responseBody": "={{ { error: $json.error } }}",
+    "options": {
+     "responseCode": 400
+    }
+   }
+  },
+  {
+   "id": "b84b6cd8-b5ea-468b-bbd6-c8dcc0caf925",
+   "name": "Nota API",
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    -40,
+    -380
+   ],
+   "parameters": {
+    "width": 760,
+    "height": 300,
+    "color": 7,
+    "content": "## API de cargas (simulada)\nHace de cuenta que es el sistema de cargas de la empresa. El detector diario le manda **todos los remitos en un solo pedido** para gastar una ejecución y no cien.\n\n- **Autenticación:** Header Auth. Sin la clave correcta en `X-API-Key`, n8n responde 403 antes de ejecutar nada.\n- **400:** el pedido no trae la lista de remitos.\n- **503:** la planilla de cargas no se pudo leer.\n- **Búsqueda aproximada:** si el remito no aparece y el pedido trae transportista y fecha, devuelve en `similares` las cargas disponibles de ese transportista con hasta 2 días de diferencia.\n- **200:** por cada remito devuelve `Disponible`, `Facturada` (usada en otra factura, posible G4), `Múltiples cargas` o `No encontrada`."
+   }
+  }
+ ],
+ "connections": {
+  "POST /cargas": {
+   "main": [
+    [
+     {
+      "node": "Validar pedido",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Validar pedido": {
+   "main": [
+    [
+     {
+      "node": "¿Pedido válido?",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "¿Pedido válido?": {
+   "main": [
+    [
+     {
+      "node": "Leer cargas",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "Responder 400",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Leer cargas": {
+   "main": [
+    [
+     {
+      "node": "Buscar remitos",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "Responder 503",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Buscar remitos": {
+   "main": [
+    [
+     {
+      "node": "Responder 200",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  }
+ },
+ "settings": {
+  "executionOrder": "v1"
+ },
+ "pinData": {}
+}

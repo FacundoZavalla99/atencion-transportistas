@@ -1,0 +1,1047 @@
+{
+ "name": "Entrega final - Herramientas del agente",
+ "nodes": [
+  {
+   "id": "723429f9-b192-4b3b-b662-da166b4ea12b",
+   "name": "Recibir pedido del agente",
+   "type": "n8n-nodes-base.executeWorkflowTrigger",
+   "typeVersion": 1.1,
+   "position": [
+    0,
+    0
+   ],
+   "parameters": {
+    "inputSource": "workflowInputs",
+    "workflowInputs": {
+     "values": [
+      {
+       "name": "accion"
+      },
+      {
+       "name": "telefono"
+      },
+      {
+       "name": "cuit"
+      },
+      {
+       "name": "clave"
+      },
+      {
+       "name": "nro_comprobante"
+      },
+      {
+       "name": "tipo_reclamo"
+      },
+      {
+       "name": "detalle"
+      }
+     ]
+    }
+   }
+  },
+  {
+   "id": "d347ccb7-4614-4bb3-a257-4c0f22e85b0c",
+   "name": "Hashear clave",
+   "type": "n8n-nodes-base.crypto",
+   "typeVersion": 1,
+   "position": [
+    220,
+    0
+   ],
+   "parameters": {
+    "action": "hash",
+    "type": "SHA256",
+    "value": "={{ String($json.cuit || '').replace(/\\D/g, '') + ':' + ($json.clave || '') }}",
+    "dataPropertyName": "clave_hash",
+    "encoding": "hex"
+   }
+  },
+  {
+   "id": "f9a9561c-a603-4405-8bf2-a63576e99d1c",
+   "name": "Leer parámetros",
+   "type": "n8n-nodes-base.googleSheets",
+   "typeVersion": 4.5,
+   "position": [
+    440,
+    0
+   ],
+   "parameters": {
+    "documentId": {
+     "__rl": true,
+     "mode": "id",
+     "value": "TU_ID_PLANILLA_ATENCION"
+    },
+    "sheetName": {
+     "__rl": true,
+     "mode": "name",
+     "value": "Parametros"
+    },
+    "options": {}
+   },
+   "executeOnce": true,
+   "alwaysOutputData": true
+  },
+  {
+   "id": "4546ab30-bf31-4e5a-99b1-8a2ec1d7c2ee",
+   "name": "Leer transportistas",
+   "type": "n8n-nodes-base.googleSheets",
+   "typeVersion": 4.5,
+   "position": [
+    640,
+    0
+   ],
+   "parameters": {
+    "documentId": {
+     "__rl": true,
+     "mode": "id",
+     "value": "TU_ID_PLANILLA_ATENCION"
+    },
+    "sheetName": {
+     "__rl": true,
+     "mode": "name",
+     "value": "Transportistas"
+    },
+    "options": {}
+   },
+   "executeOnce": true,
+   "alwaysOutputData": true
+  },
+  {
+   "id": "44e3a9ba-5ffb-4cea-ba8d-a6e450e98715",
+   "name": "Leer facturas",
+   "type": "n8n-nodes-base.googleSheets",
+   "typeVersion": 4.5,
+   "position": [
+    840,
+    0
+   ],
+   "parameters": {
+    "documentId": {
+     "__rl": true,
+     "mode": "id",
+     "value": "TU_ID_PLANILLA_ATENCION"
+    },
+    "sheetName": {
+     "__rl": true,
+     "mode": "name",
+     "value": "Facturas"
+    },
+    "options": {}
+   },
+   "executeOnce": true,
+   "alwaysOutputData": true
+  },
+  {
+   "id": "7ecc35ec-8177-4265-8158-d3691b17c711",
+   "name": "Leer viajes",
+   "type": "n8n-nodes-base.googleSheets",
+   "typeVersion": 4.5,
+   "position": [
+    1040,
+    0
+   ],
+   "parameters": {
+    "documentId": {
+     "__rl": true,
+     "mode": "id",
+     "value": "TU_ID_PLANILLA_ATENCION"
+    },
+    "sheetName": {
+     "__rl": true,
+     "mode": "name",
+     "value": "Viajes"
+    },
+    "options": {}
+   },
+   "executeOnce": true,
+   "alwaysOutputData": true
+  },
+  {
+   "id": "f028e491-2c85-43a4-8497-808ada5b1b87",
+   "name": "Leer libro",
+   "type": "n8n-nodes-base.googleSheets",
+   "typeVersion": 4.5,
+   "position": [
+    1240,
+    0
+   ],
+   "parameters": {
+    "documentId": {
+     "__rl": true,
+     "mode": "id",
+     "value": "TU_ID_PLANILLA_ATENCION"
+    },
+    "sheetName": {
+     "__rl": true,
+     "mode": "name",
+     "value": "Libro_de_casos"
+    },
+    "options": {}
+   },
+   "executeOnce": true,
+   "alwaysOutputData": true
+  },
+  {
+   "id": "22a20b78-6c2c-42dd-b0b7-465b286ffa34",
+   "name": "Leer sesiones",
+   "type": "n8n-nodes-base.googleSheets",
+   "typeVersion": 4.5,
+   "position": [
+    1440,
+    0
+   ],
+   "parameters": {
+    "documentId": {
+     "__rl": true,
+     "mode": "id",
+     "value": "TU_ID_PLANILLA_ATENCION"
+    },
+    "sheetName": {
+     "__rl": true,
+     "mode": "name",
+     "value": "Sesiones"
+    },
+    "options": {}
+   },
+   "executeOnce": true,
+   "alwaysOutputData": true
+  },
+  {
+   "id": "598254ca-2ae7-4872-8814-279aa6e805fc",
+   "name": "Leer reclamos",
+   "type": "n8n-nodes-base.googleSheets",
+   "typeVersion": 4.5,
+   "position": [
+    1640,
+    0
+   ],
+   "parameters": {
+    "documentId": {
+     "__rl": true,
+     "mode": "id",
+     "value": "TU_ID_PLANILLA_ATENCION"
+    },
+    "sheetName": {
+     "__rl": true,
+     "mode": "name",
+     "value": "Reclamos"
+    },
+    "options": {}
+   },
+   "executeOnce": true,
+   "alwaysOutputData": true
+  },
+  {
+   "id": "83b572a2-1cf4-4bd0-be49-d796b6ec884d",
+   "name": "Leer feriados",
+   "type": "n8n-nodes-base.googleSheets",
+   "typeVersion": 4.5,
+   "position": [
+    1840,
+    0
+   ],
+   "parameters": {
+    "documentId": {
+     "__rl": true,
+     "mode": "id",
+     "value": "TU_ID_PLANILLA_ATENCION"
+    },
+    "sheetName": {
+     "__rl": true,
+     "mode": "name",
+     "value": "Feriados"
+    },
+    "options": {}
+   },
+   "executeOnce": true,
+   "alwaysOutputData": true
+  },
+  {
+   "id": "ece72a70-9065-48b7-a097-177845b3df71",
+   "name": "Resolver herramienta",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    2040,
+    0
+   ],
+   "parameters": {
+    "jsCode": "// Resuelve la herramienta que pidió el agente (entrega final: planilla única, búsqueda por comprobante o por remito/CTG).\n// Toda la lógica de negocio está acá, no en la IA:\n// quién es el transportista, si la factura es suya, si está a término y si corresponde un reclamo.\nconst p = $('Recibir pedido del agente').first().json;\nconst claveHash = $('Hashear clave').first().json.clave_hash;\n// Cada hoja la lee un nodo de Google Sheets; acá se pasan todos los valores a texto para comparar sin sorpresas\nconst leer = n => $(n).all().map(i => i.json).filter(o => Object.keys(o).length)\n  .map(o => Object.fromEntries(Object.entries(o).map(([k, v]) => [k, v == null ? '' : String(v)])));\nconst hojas = { Transportistas: leer('Leer transportistas'), Facturas: leer('Leer facturas'), Viajes: leer('Leer viajes'),\n                Libro: leer('Leer libro'), Sesiones: leer('Leer sesiones'), Reclamos: leer('Leer reclamos'), Feriados: leer('Leer feriados') };\nconst P = Object.fromEntries(leer('Leer parámetros').map(p => [p.parametro, p.valor]));\nconst digitos = s => String(s ?? '').replace(/\\D/g, '');\nconst norm = s => digitos(s).replace(/^0+/, '');\nconst ahora = new Date();\n// fecha de Argentina (UTC-3), o la de prueba si Parametros tiene fecha_ejecucion\nconst hoy = P.fecha_ejecucion ? String(P.fecha_ejecucion).slice(0, 10) : new Date(ahora.getTime() - 3 * 3600000).toISOString().slice(0, 10);\n\n// Días hábiles: sin sábados, domingos ni feriados de la hoja Feriados\nconst feriados = new Set(hojas.Feriados.map(f => f.fecha));\nconst habil = d => ![0, 6].includes(d.getUTCDay()) && !feriados.has(d.toISOString().slice(0, 10));\nconst mover = (iso, n) => { const d = new Date(iso + 'T00:00:00Z'); const paso = n > 0 ? 1 : -1;\n  while (n) { d.setUTCDate(d.getUTCDate() + paso); if (habil(d)) n -= paso; } return d.toISOString().slice(0, 10); };\nconst fmt = iso => iso ? iso.split('-').reverse().join('/') : '';\n\n// El transportista puede escribir el comprobante completo (0003-00011036), solo el número (11036)\n// o el remito/CTG del viaje: en ese caso se busca en Viajes la factura que lo incluye\nconst buscarFactura = (idT, texto) => {\n  const nro = norm(texto);\n  if (!nro) return { f: null, cant: 0, por: '' };\n  const propias = hojas.Facturas.filter(x => x.id_transportista === idT);\n  let fs = propias.filter(x => norm(x.nro_comprobante) === nro || norm(String(x.nro_comprobante).split('-').pop()) === nro);\n  let por = 'comprobante', remito = '';\n  if (fs.length === 0) {\n    const vs = hojas.Viajes.filter(v => norm(v.remito_ctg) === nro && propias.some(f => f.id_factura === v.id_factura));\n    fs = [...new Set(vs.map(v => v.id_factura))].map(id => propias.find(f => f.id_factura === id));\n    if (vs.length) { por = 'remito'; remito = vs[0].remito_ctg; }\n  }\n  return { f: fs.length === 1 ? fs[0] : null, cant: fs.length, por, remito };\n};\nconst textoCaso = { 'Carga no cargada en TMS': 'el viaje todavía no figura en el sistema de cargas y lo estamos gestionando',\n  'Consulta G4': 'la carga del viaje figura asociada a otra factura y la estamos revisando',\n  'Posible remito mal cargado': 'el remito del viaje figura cargado con una diferencia y lo estamos corrigiendo',\n  'Revisión manual': 'un analista está revisando el viaje' };\n\n// Sesión: el transportista sale de la hoja Sesiones por el teléfono del mensaje, nunca de lo que diga la IA\nconst ses = hojas.Sesiones.find(s => s.telefono === p.telefono && s.valida_hasta > ahora.toISOString());\nconst trans = ses ? hojas.Transportistas.find(t => t.id_transportista === ses.id_transportista) : null;\n\nlet resultado = {}, escritura = 'ninguna', datos = {};\n\nfunction situacion(f) {\n  const desde = mover(f.fecha_vencimiento, -1), hasta = mover(f.fecha_vencimiento, 3);\n  const base = { comprobante: f.nro_comprobante, importe: Number(f.importe), vencimiento: fmt(f.fecha_vencimiento),\n                 ventana_de_pago: `${fmt(desde)} al ${fmt(hasta)}` };\n  if (f.estado_pago === 'Pagada') return { ...base, estado: 'pagada', fecha_pago: fmt(f.fecha_pago), a_termino: f.fecha_pago <= hasta };\n  if (f.estado_pago === 'Rechazada') return { ...base, estado: 'rechazada', motivo_rechazo: f.motivo_rechazo };\n  const aTermino = hoy <= hasta;\n  const caso = hojas.Libro.find(c => c.id_factura === f.id_factura && c.estado !== 'Resuelto');\n  if (caso) base.situacion = textoCaso[caso.categoria] ?? textoCaso['Revisión manual'];\n  return { ...base, estado: 'recibida_en_proceso', a_termino: aTermino,\n           fecha_estimada_pago: aTermino ? `entre el ${fmt(hoy > desde ? hoy : desde)} y el ${fmt(hasta)}` : '',\n           puede_reclamar: !aTermino };\n}\n\nif (p.accion === 'validar_identidad') {\n  const t = hojas.Transportistas.find(t => digitos(t.cuit) === digitos(p.cuit));\n  if (!t) resultado = { ok: false, motivo: 'cuit_no_registrado' };\n  else if (t.estado_clave === 'Bloqueada') resultado = { ok: false, motivo: 'clave_bloqueada', puede_pedir_clave: true };\n  else if (t.estado_clave !== 'Activa') resultado = { ok: false, motivo: 'sin_clave_generada', puede_pedir_clave: true };\n  else if (!p.clave) resultado = { ok: false, motivo: 'falta_clave' };\n  else if (claveHash !== t.clave_hash) {\n    const intentos = Number(t.intentos_fallidos || 0) + 1;\n    const bloquea = intentos >= 3;\n    resultado = { ok: false, motivo: bloquea ? 'clave_bloqueada' : 'clave_incorrecta', intentos_restantes: Math.max(0, 3 - intentos), puede_pedir_clave: bloquea };\n    escritura = 'intento_fallido';\n    datos = { id_transportista: t.id_transportista, intentos_fallidos: intentos, estado_clave: bloquea ? 'Bloqueada' : 'Activa' };\n  } else {\n    resultado = { ok: true, razon_social: t.razon_social, sesion_valida_minutos: 30 };\n    escritura = 'sesion';\n    datos = { telefono: p.telefono, id_transportista: t.id_transportista, razon_social: t.razon_social,\n              valida_hasta: new Date(ahora.getTime() + 30 * 60000).toISOString(), estado: 'Activa' };\n  }\n} else if (p.accion === 'consultar_factura') {\n  if (!trans) resultado = { ok: false, motivo: 'sin_sesion' };\n  else {\n    // Solo facturas de este transportista: la de otro da \"no recibida\", igual que una que no existe\n    const { f, cant, por } = buscarFactura(trans.id_transportista, p.nro_comprobante);\n    if (!norm(p.nro_comprobante)) resultado = { ok: false, motivo: 'falta_comprobante' };\n    else if (cant > 1) resultado = { ok: false, motivo: 'numero_ambiguo_pedir_punto_de_venta' };\n    else resultado = f ? { ok: true, encontrada_por: por, ...situacion(f) } : { ok: true, estado: 'no_recibida', comprobante: p.nro_comprobante, puede_reclamar: true };\n  }\n} else if (p.accion === 'listar_pendientes') {\n  if (!trans) resultado = { ok: false, motivo: 'sin_sesion' };\n  else {\n    const fs = hojas.Facturas.filter(x => x.id_transportista === trans.id_transportista && x.estado_pago === 'En proceso')\n      .sort((a, b) => a.fecha_vencimiento.localeCompare(b.fecha_vencimiento)).map(situacion);\n    resultado = { ok: true, cantidad: fs.length, facturas: fs.slice(0, 8), aclaracion: fs.length > 8 ? 'Se muestran las 8 más próximas a vencer' : '' };\n  }\n} else if (p.accion === 'abrir_reclamo') {\n  const tipos = ['generacion_clave', 'factura_no_recibida', 'fuera_de_termino', 'disconformidad', 'derivar_a_persona'];\n  const tipo = String(p.tipo_reclamo || '').trim();\n  let t = trans, f = null, error = '', hallazgo = {};\n  if (!tipos.includes(tipo)) error = 'tipo_invalido';\n  else if (tipo === 'generacion_clave') {\n    t = hojas.Transportistas.find(x => digitos(x.cuit) === digitos(p.cuit));\n    if (!t) error = 'cuit_no_registrado';\n  } else if (!t) error = 'sin_sesion';\n  else if (tipo !== 'derivar_a_persona') {\n    const nro = norm(p.nro_comprobante);\n    hallazgo = buscarFactura(t.id_transportista, p.nro_comprobante); f = hallazgo.f;\n    if (!nro) error = 'falta_comprobante';\n    else if (tipo === 'factura_no_recibida' && f) error = 'la_factura_si_fue_recibida';\n    else if (tipo === 'fuera_de_termino' && (!f || situacion(f).estado !== 'recibida_en_proceso' || situacion(f).a_termino)) error = 'la_factura_no_esta_fuera_de_termino';\n    else if (tipo === 'disconformidad' && !f) error = 'factura_no_encontrada';\n  }\n  // Un solo reclamo abierto por tipo y comprobante (o por CUIT si es de clave): si ya existe, se informa el mismo\n  const clave = tipo === 'generacion_clave' ? digitos(p.cuit) : norm(p.nro_comprobante);\n  const previo = !error && hojas.Reclamos.find(r => r.tipo === tipo && r.estado === 'Abierto' &&\n    (tipo === 'generacion_clave' ? digitos(r.cuit) === clave : (r.id_transportista === t.id_transportista && norm(r.nro_comprobante) === norm(f ? f.nro_comprobante : p.nro_comprobante))));\n  if (error) resultado = { ok: false, motivo: error };\n  else if (previo) resultado = { ok: true, id_reclamo: previo.id_reclamo, ya_existia: true, respuesta_por: 'mail registrado' };\n  else {\n    const id = 'R-' + hoy.slice(2).replace(/-/g, '') + '-W' + String(hojas.Reclamos.length + 1).padStart(3, '0');\n    resultado = { ok: true, id_reclamo: id, ya_existia: false, respuesta_por: 'mail registrado', plazo: '48 horas hábiles' };\n    escritura = 'reclamo';\n    datos = { id_reclamo: id, fecha_alta: hoy, canal: 'WhatsApp', tipo, telefono: p.telefono, id_transportista: t.id_transportista,\n              cuit: t.cuit, nro_comprobante: f ? f.nro_comprobante : (p.nro_comprobante || ''), remito_ctg: hallazgo.remito || '',\n              id_factura: f ? f.id_factura : '', detalle: String(p.detalle || '').slice(0, 300),\n              estado: 'Abierto', razon_social: t.razon_social, email_contacto: t.email_contacto };\n  }\n} else {\n  resultado = { ok: false, motivo: 'accion_desconocida' };\n}\n\nreturn [{ json: { resultado, escritura, datos } }];\n"
+   }
+  },
+  {
+   "id": "abdbe0fb-d34d-492f-abad-f2b2fd5dc15a",
+   "name": "¿Qué hay que guardar?",
+   "type": "n8n-nodes-base.switch",
+   "typeVersion": 3.2,
+   "position": [
+    2260,
+    0
+   ],
+   "parameters": {
+    "rules": {
+     "values": [
+      {
+       "outputKey": "sesion",
+       "renameOutput": true,
+       "conditions": {
+        "options": {
+         "caseSensitive": true,
+         "typeValidation": "strict",
+         "version": 2
+        },
+        "combinator": "and",
+        "conditions": [
+         {
+          "id": "92053a2f-8460-4c80-aacd-c40c3831bac5",
+          "leftValue": "={{ $json.escritura }}",
+          "rightValue": "sesion",
+          "operator": {
+           "type": "string",
+           "operation": "equals"
+          }
+         }
+        ]
+       }
+      },
+      {
+       "outputKey": "intento_fallido",
+       "renameOutput": true,
+       "conditions": {
+        "options": {
+         "caseSensitive": true,
+         "typeValidation": "strict",
+         "version": 2
+        },
+        "combinator": "and",
+        "conditions": [
+         {
+          "id": "98403aff-b23e-4081-9dc8-0c1db53e4dd8",
+          "leftValue": "={{ $json.escritura }}",
+          "rightValue": "intento_fallido",
+          "operator": {
+           "type": "string",
+           "operation": "equals"
+          }
+         }
+        ]
+       }
+      },
+      {
+       "outputKey": "reclamo",
+       "renameOutput": true,
+       "conditions": {
+        "options": {
+         "caseSensitive": true,
+         "typeValidation": "strict",
+         "version": 2
+        },
+        "combinator": "and",
+        "conditions": [
+         {
+          "id": "39254793-e38e-40ba-92c2-45c5e1554826",
+          "leftValue": "={{ $json.escritura }}",
+          "rightValue": "reclamo",
+          "operator": {
+           "type": "string",
+           "operation": "equals"
+          }
+         }
+        ]
+       }
+      }
+     ]
+    },
+    "options": {
+     "fallbackOutput": "extra",
+     "renameFallbackOutput": "nada"
+    }
+   }
+  },
+  {
+   "id": "ce69816a-6a2a-4cae-a956-e061e534359b",
+   "name": "Abrir sesión",
+   "type": "n8n-nodes-base.googleSheets",
+   "typeVersion": 4.5,
+   "position": [
+    2500,
+    -260
+   ],
+   "parameters": {
+    "operation": "appendOrUpdate",
+    "documentId": {
+     "__rl": true,
+     "mode": "id",
+     "value": "TU_ID_PLANILLA_ATENCION"
+    },
+    "sheetName": {
+     "__rl": true,
+     "mode": "name",
+     "value": "Sesiones"
+    },
+    "columns": {
+     "mappingMode": "defineBelow",
+     "value": {
+      "telefono": "={{ $json.datos.telefono }}",
+      "id_transportista": "={{ $json.datos.id_transportista }}",
+      "razon_social": "={{ $json.datos.razon_social }}",
+      "valida_hasta": "={{ $json.datos.valida_hasta }}",
+      "estado": "={{ $json.datos.estado }}"
+     },
+     "matchingColumns": [
+      "telefono"
+     ],
+     "schema": [
+      {
+       "id": "telefono",
+       "displayName": "telefono",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "id_transportista",
+       "displayName": "id_transportista",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "razon_social",
+       "displayName": "razon_social",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "valida_hasta",
+       "displayName": "valida_hasta",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "estado",
+       "displayName": "estado",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      }
+     ],
+     "attemptToConvertTypes": false,
+     "convertFieldsToString": false
+    },
+    "options": {
+     "cellFormat": "RAW"
+    }
+   }
+  },
+  {
+   "id": "83a34578-f137-4cf2-a8eb-a4afed44742f",
+   "name": "Reiniciar intentos",
+   "type": "n8n-nodes-base.googleSheets",
+   "typeVersion": 4.5,
+   "position": [
+    2720,
+    -260
+   ],
+   "parameters": {
+    "operation": "update",
+    "documentId": {
+     "__rl": true,
+     "mode": "id",
+     "value": "TU_ID_PLANILLA_ATENCION"
+    },
+    "sheetName": {
+     "__rl": true,
+     "mode": "name",
+     "value": "Transportistas"
+    },
+    "columns": {
+     "mappingMode": "defineBelow",
+     "value": {
+      "id_transportista": "={{ $('Resolver herramienta').first().json.datos.id_transportista }}",
+      "intentos_fallidos": "0"
+     },
+     "matchingColumns": [
+      "id_transportista"
+     ],
+     "schema": [
+      {
+       "id": "id_transportista",
+       "displayName": "id_transportista",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "intentos_fallidos",
+       "displayName": "intentos_fallidos",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      }
+     ],
+     "attemptToConvertTypes": false,
+     "convertFieldsToString": false
+    },
+    "options": {
+     "cellFormat": "RAW"
+    }
+   },
+   "executeOnce": true
+  },
+  {
+   "id": "0148f8c7-a1fd-413a-8712-9ef2c6a2ec32",
+   "name": "Sumar intento fallido",
+   "type": "n8n-nodes-base.googleSheets",
+   "typeVersion": 4.5,
+   "position": [
+    2500,
+    -80
+   ],
+   "parameters": {
+    "operation": "update",
+    "documentId": {
+     "__rl": true,
+     "mode": "id",
+     "value": "TU_ID_PLANILLA_ATENCION"
+    },
+    "sheetName": {
+     "__rl": true,
+     "mode": "name",
+     "value": "Transportistas"
+    },
+    "columns": {
+     "mappingMode": "defineBelow",
+     "value": {
+      "id_transportista": "={{ $json.datos.id_transportista }}",
+      "intentos_fallidos": "={{ $json.datos.intentos_fallidos }}",
+      "estado_clave": "={{ $json.datos.estado_clave }}"
+     },
+     "matchingColumns": [
+      "id_transportista"
+     ],
+     "schema": [
+      {
+       "id": "id_transportista",
+       "displayName": "id_transportista",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "intentos_fallidos",
+       "displayName": "intentos_fallidos",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "estado_clave",
+       "displayName": "estado_clave",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      }
+     ],
+     "attemptToConvertTypes": false,
+     "convertFieldsToString": false
+    },
+    "options": {
+     "cellFormat": "RAW"
+    }
+   },
+   "executeOnce": true
+  },
+  {
+   "id": "9a479dcb-01fd-413b-b631-ee1bd9793cdd",
+   "name": "Registrar reclamo",
+   "type": "n8n-nodes-base.googleSheets",
+   "typeVersion": 4.5,
+   "position": [
+    2500,
+    100
+   ],
+   "parameters": {
+    "operation": "append",
+    "documentId": {
+     "__rl": true,
+     "mode": "id",
+     "value": "TU_ID_PLANILLA_ATENCION"
+    },
+    "sheetName": {
+     "__rl": true,
+     "mode": "name",
+     "value": "Reclamos"
+    },
+    "columns": {
+     "mappingMode": "defineBelow",
+     "value": {
+      "id_reclamo": "={{ $json.datos.id_reclamo }}",
+      "fecha_alta": "={{ $json.datos.fecha_alta }}",
+      "canal": "={{ $json.datos.canal }}",
+      "tipo": "={{ $json.datos.tipo }}",
+      "telefono": "={{ $json.datos.telefono }}",
+      "id_transportista": "={{ $json.datos.id_transportista }}",
+      "cuit": "={{ $json.datos.cuit }}",
+      "nro_comprobante": "={{ $json.datos.nro_comprobante }}",
+      "remito_ctg": "={{ $json.datos.remito_ctg }}",
+      "id_factura": "={{ $json.datos.id_factura }}",
+      "detalle": "={{ $json.datos.detalle }}",
+      "estado": "={{ $json.datos.estado }}"
+     },
+     "matchingColumns": [],
+     "schema": [
+      {
+       "id": "id_reclamo",
+       "displayName": "id_reclamo",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "fecha_alta",
+       "displayName": "fecha_alta",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "canal",
+       "displayName": "canal",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "tipo",
+       "displayName": "tipo",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "telefono",
+       "displayName": "telefono",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "id_transportista",
+       "displayName": "id_transportista",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "cuit",
+       "displayName": "cuit",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "nro_comprobante",
+       "displayName": "nro_comprobante",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "remito_ctg",
+       "displayName": "remito_ctg",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "id_factura",
+       "displayName": "id_factura",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "detalle",
+       "displayName": "detalle",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "estado",
+       "displayName": "estado",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      }
+     ],
+     "attemptToConvertTypes": false,
+     "convertFieldsToString": false
+    },
+    "options": {
+     "cellFormat": "RAW"
+    }
+   },
+   "executeOnce": true
+  },
+  {
+   "id": "a493df13-8c35-4333-9d40-3624e4693930",
+   "name": "Avisar al analista",
+   "type": "n8n-nodes-base.gmail",
+   "typeVersion": 2.1,
+   "position": [
+    2720,
+    100
+   ],
+   "parameters": {
+    "sendTo": "={{ $('Leer parámetros').all().find(i => i.json.parametro === 'mail_analista')?.json.valor }}",
+    "subject": "=[WhatsApp] Reclamo {{ $('Resolver herramienta').first().json.datos.id_reclamo }} · {{ $('Resolver herramienta').first().json.datos.tipo }} · {{ $('Resolver herramienta').first().json.datos.razon_social }}",
+    "emailType": "text",
+    "message": "={{ (d => `Nuevo reclamo desde WhatsApp\\n\\nReclamo: ${d.id_reclamo}\\nTipo: ${d.tipo}\\nTransportista: ${d.razon_social}\\nComprobante: ${d.nro_comprobante || '-'}\\nRemito/CTG: ${d.remito_ctg || '-'}\\nDetalle: ${d.detalle || '-'}\\n\\nEl detector diario lo engancha al caso de la factura, si lo tiene.`)($('Resolver herramienta').first().json.datos) }}",
+    "options": {
+     "appendAttribution": false
+    }
+   },
+   "webhookId": "32d3b858-1218-404b-85a2-605a62a616e0"
+  },
+  {
+   "id": "139c013b-5ec3-415b-b7a4-91b3ef28563e",
+   "name": "Devolver (sesión)",
+   "type": "n8n-nodes-base.set",
+   "typeVersion": 3.4,
+   "position": [
+    2940,
+    -260
+   ],
+   "parameters": {
+    "mode": "raw",
+    "jsonOutput": "={{ JSON.stringify($('Resolver herramienta').first().json.resultado) }}",
+    "options": {}
+   }
+  },
+  {
+   "id": "17751e78-53f2-41d0-afb5-16e8aabe08c2",
+   "name": "Devolver (intento)",
+   "type": "n8n-nodes-base.set",
+   "typeVersion": 3.4,
+   "position": [
+    2720,
+    -80
+   ],
+   "parameters": {
+    "mode": "raw",
+    "jsonOutput": "={{ JSON.stringify($('Resolver herramienta').first().json.resultado) }}",
+    "options": {}
+   }
+  },
+  {
+   "id": "9d49fb7d-9824-41e6-940d-fd2b89043770",
+   "name": "Devolver (reclamo)",
+   "type": "n8n-nodes-base.set",
+   "typeVersion": 3.4,
+   "position": [
+    2940,
+    100
+   ],
+   "parameters": {
+    "mode": "raw",
+    "jsonOutput": "={{ JSON.stringify($('Resolver herramienta').first().json.resultado) }}",
+    "options": {}
+   }
+  },
+  {
+   "id": "1f0e5dab-f2c7-4e9f-9df0-e29bda089d51",
+   "name": "Devolver",
+   "type": "n8n-nodes-base.set",
+   "typeVersion": 3.4,
+   "position": [
+    2500,
+    280
+   ],
+   "parameters": {
+    "mode": "raw",
+    "jsonOutput": "={{ JSON.stringify($('Resolver herramienta').first().json.resultado) }}",
+    "options": {}
+   }
+  },
+  {
+   "id": "cc40e404-b739-4a82-a015-043040774684",
+   "name": "Nota herramientas",
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    0,
+    -320
+   ],
+   "parameters": {
+    "content": "## Herramientas del agente\nToda la lógica de negocio está en **Resolver herramienta**: quién es el transportista (por la hoja Sesiones y el teléfono, nunca por la IA), si la factura es suya, la ventana de pago en días hábiles (−1 / +3 del vencimiento), la situación del caso si lo tiene y si corresponde el reclamo.\nLa factura se encuentra por **número de comprobante o por remito/CTG** (pasando por Viajes). La clave se compara como hash SHA-256.",
+    "width": 760,
+    "height": 240,
+    "color": 4
+   }
+  }
+ ],
+ "connections": {
+  "Recibir pedido del agente": {
+   "main": [
+    [
+     {
+      "node": "Hashear clave",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Hashear clave": {
+   "main": [
+    [
+     {
+      "node": "Leer parámetros",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Leer parámetros": {
+   "main": [
+    [
+     {
+      "node": "Leer transportistas",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Leer transportistas": {
+   "main": [
+    [
+     {
+      "node": "Leer facturas",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Leer facturas": {
+   "main": [
+    [
+     {
+      "node": "Leer viajes",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Leer viajes": {
+   "main": [
+    [
+     {
+      "node": "Leer libro",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Leer libro": {
+   "main": [
+    [
+     {
+      "node": "Leer sesiones",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Leer sesiones": {
+   "main": [
+    [
+     {
+      "node": "Leer reclamos",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Leer reclamos": {
+   "main": [
+    [
+     {
+      "node": "Leer feriados",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Leer feriados": {
+   "main": [
+    [
+     {
+      "node": "Resolver herramienta",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Resolver herramienta": {
+   "main": [
+    [
+     {
+      "node": "¿Qué hay que guardar?",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Abrir sesión": {
+   "main": [
+    [
+     {
+      "node": "Reiniciar intentos",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Reiniciar intentos": {
+   "main": [
+    [
+     {
+      "node": "Devolver (sesión)",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Sumar intento fallido": {
+   "main": [
+    [
+     {
+      "node": "Devolver (intento)",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Registrar reclamo": {
+   "main": [
+    [
+     {
+      "node": "Avisar al analista",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Avisar al analista": {
+   "main": [
+    [
+     {
+      "node": "Devolver (reclamo)",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "¿Qué hay que guardar?": {
+   "main": [
+    [
+     {
+      "node": "Abrir sesión",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "Sumar intento fallido",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "Registrar reclamo",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "Devolver",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  }
+ },
+ "settings": {
+  "executionOrder": "v1",
+  "timezone": "America/Argentina/Buenos_Aires",
+  "callerPolicy": "workflowsFromSameOwner"
+ },
+ "pinData": {}
+}

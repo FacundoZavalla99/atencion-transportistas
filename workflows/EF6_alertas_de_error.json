@@ -1,0 +1,180 @@
+{
+ "name": "Entrega final - Alertas de error",
+ "nodes": [
+  {
+   "parameters": {},
+   "id": "6a5ba0ac-4e79-4461-a3ae-5e08e06a8ba5",
+   "name": "Cuando falla un workflow",
+   "type": "n8n-nodes-base.errorTrigger",
+   "typeVersion": 1,
+   "position": [
+    0,
+    0
+   ]
+  },
+  {
+   "parameters": {
+    "conditions": {
+     "options": {
+      "caseSensitive": true,
+      "leftValue": "",
+      "typeValidation": "loose",
+      "version": 2
+     },
+     "conditions": [
+      {
+       "id": "972238ab-5599-4c4d-b7b0-5f4af09f4e74",
+       "leftValue": "={{ ($json.execution?.lastNodeExecuted ?? '').startsWith('Control:') }}",
+       "rightValue": "",
+       "operator": {
+        "type": "boolean",
+        "operation": "true",
+        "singleValue": true
+       }
+      }
+     ],
+     "combinator": "and"
+    },
+    "looseTypeValidation": true,
+    "options": {}
+   },
+   "id": "c24580da-e42f-4cb9-ad76-32b20b130a1a",
+   "name": "¿Ya lo avisó un control?",
+   "type": "n8n-nodes-base.if",
+   "typeVersion": 2.2,
+   "position": [
+    220,
+    0
+   ]
+  },
+  {
+   "parameters": {},
+   "id": "2a15f6ef-6249-4dfa-9f29-e68591650e49",
+   "name": "Ya avisado: no repetir mail",
+   "type": "n8n-nodes-base.noOp",
+   "typeVersion": 1,
+   "position": [
+    460,
+    -100
+   ]
+  },
+  {
+   "parameters": {
+    "assignments": {
+     "assignments": [
+      {
+       "id": "4ff60b89-5fba-490a-9bf2-99ba7fac0134",
+       "name": "workflow",
+       "value": "={{ $json.workflow?.name ?? 'Workflow sin nombre' }}",
+       "type": "string"
+      },
+      {
+       "id": "09b6dd56-66bb-4744-8939-e462095af4b9",
+       "name": "nodo",
+       "value": "={{ $json.execution?.lastNodeExecuted ?? $json.trigger?.error?.node?.name ?? 'Trigger' }}",
+       "type": "string"
+      },
+      {
+       "id": "43f5e63e-5c83-4027-8dca-4e83a35e58a1",
+       "name": "error",
+       "value": "={{ $json.execution?.error?.message ?? $json.trigger?.error?.message ?? 'Sin mensaje' }}",
+       "type": "string"
+      },
+      {
+       "id": "a28c9106-1ae3-413b-9157-cc7bc3db941b",
+       "name": "modo",
+       "value": "={{ $json.execution?.mode === 'trigger' ? 'Programada (todos los días a las 8)' : ($json.execution?.mode ?? 'desconocido') }}",
+       "type": "string"
+      },
+      {
+       "id": "298d07f8-4cb1-4b96-815b-a04af0c5a594",
+       "name": "cuando",
+       "value": "={{ $now.setZone('America/Argentina/Buenos_Aires').toFormat('dd/MM/yyyy HH:mm') }}",
+       "type": "string"
+      },
+      {
+       "id": "24e65492-22e2-4007-b111-e42313ca8e29",
+       "name": "link",
+       "value": "={{ $json.execution?.url ?? 'http://localhost:5678/workflow/' + ($json.workflow?.id ?? '') + '/executions/' + ($json.execution?.id ?? '') }}",
+       "type": "string"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "id": "8bc2d870-e2b8-4057-ac56-bda34551f0e8",
+   "name": "Armar mail de error",
+   "type": "n8n-nodes-base.set",
+   "typeVersion": 3.4,
+   "position": [
+    460,
+    100
+   ]
+  },
+  {
+   "parameters": {
+    "sendTo": "TU_MAIL_DE_PRUEBA",
+    "subject": "=[Atención al transportista] Error en {{ $json.workflow }} · {{ $json.nodo }}",
+    "emailType": "html",
+    "message": "=<div style=\"font-family:Arial,sans-serif;font-size:14px;color:#222\"><p>Hola,</p><p>El workflow <b>{{ $json.workflow }}</b> terminó con un <b>error que no estaba previsto</b> por los controles.</p><table cellpadding=\"6\" style=\"border-collapse:collapse;border:1px solid #ddd\"><tr><td style=\"background:#f3f3f3\"><b>Nodo que falló</b></td><td>{{ $json.nodo }}</td></tr><tr><td style=\"background:#f3f3f3\"><b>Error</b></td><td>{{ $json.error }}</td></tr><tr><td style=\"background:#f3f3f3\"><b>Ejecución</b></td><td>{{ $json.modo }}</td></tr><tr><td style=\"background:#f3f3f3\"><b>Cuándo</b></td><td>{{ $json.cuando }}</td></tr></table><p>Lo que se haya escrito antes del error quedó en la planilla. Como el flujo no duplica casos, se puede volver a correr sin problema una vez corregido.</p><p><a href=\"{{ $json.link }}\">Ver la ejecución en n8n</a></p></div>",
+    "options": {
+     "appendAttribution": false
+    }
+   },
+   "id": "352909c0-0641-4ee0-912c-15c65990bcc5",
+   "name": "Enviar mail de error",
+   "type": "n8n-nodes-base.gmail",
+   "typeVersion": 2.1,
+   "position": [
+    680,
+    100
+   ],
+   "webhookId": "5de29fcd-5c32-4af0-b06f-faf19aecf580"
+  }
+ ],
+ "connections": {
+  "Cuando falla un workflow": {
+   "main": [
+    [
+     {
+      "node": "¿Ya lo avisó un control?",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "¿Ya lo avisó un control?": {
+   "main": [
+    [
+     {
+      "node": "Ya avisado: no repetir mail",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "Armar mail de error",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Armar mail de error": {
+   "main": [
+    [
+     {
+      "node": "Enviar mail de error",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  }
+ },
+ "settings": {
+  "executionOrder": "v1"
+ }
+}
