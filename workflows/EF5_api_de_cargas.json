@@ -2,7 +2,7 @@
  "name": "Entrega final - API de cargas",
  "nodes": [
   {
-   "id": "5b487b72-b186-430d-ad9c-11680c4d53df",
+   "id": "adb9e05a-d3fe-4550-ab04-ad7adc8e4b6a",
    "name": "POST /cargas",
    "type": "n8n-nodes-base.webhook",
    "typeVersion": 2,
@@ -10,7 +10,7 @@
     0,
     0
    ],
-   "webhookId": "36f9439b-070b-4e07-90cc-b75b41e70dd2",
+   "webhookId": "78593f90-d168-40a5-9a26-0b96fb94c908",
    "parameters": {
     "httpMethod": "POST",
     "path": "cargas",
@@ -20,7 +20,7 @@
    }
   },
   {
-   "id": "39e19fae-a210-4020-adb9-2006bd2a5fec",
+   "id": "e257065e-f974-4f20-8ccb-7684ac2a6601",
    "name": "Validar pedido",
    "type": "n8n-nodes-base.code",
    "typeVersion": 2,
@@ -33,7 +33,7 @@
    }
   },
   {
-   "id": "a5e7dbc9-5be8-46c3-9d38-4eb4b79942a6",
+   "id": "98c52865-df01-4bc9-9778-665194b55444",
    "name": "¿Pedido válido?",
    "type": "n8n-nodes-base.if",
    "typeVersion": 2.2,
@@ -67,7 +67,7 @@
    }
   },
   {
-   "id": "a2f8348f-a3e4-49c4-99d6-5dfbbf4d7387",
+   "id": "df96b71a-d6b8-4887-8185-da238609cd7f",
    "name": "Leer cargas",
    "type": "n8n-nodes-base.googleSheets",
    "typeVersion": 4.5,
@@ -91,7 +91,7 @@
    }
   },
   {
-   "id": "a0e0f16a-3db9-425e-8b63-c87038aa11ef",
+   "id": "58003106-913b-447b-aeea-dd4c26543bdb",
    "name": "Buscar remitos",
    "type": "n8n-nodes-base.code",
    "typeVersion": 2,
@@ -104,7 +104,7 @@
    }
   },
   {
-   "id": "e11e5899-975c-4e49-9c70-a6f855ef07be",
+   "id": "25b2414f-a37d-4152-85a3-a0d7ae02ced3",
    "name": "Responder 200",
    "type": "n8n-nodes-base.respondToWebhook",
    "typeVersion": 1.1,
@@ -121,7 +121,7 @@
    }
   },
   {
-   "id": "f3de9553-5247-4a33-80f3-941f52dd1f1f",
+   "id": "0c294b0a-a321-431e-b342-9f0a70edbb1a",
    "name": "Responder 503",
    "type": "n8n-nodes-base.respondToWebhook",
    "typeVersion": 1.1,
@@ -138,7 +138,7 @@
    }
   },
   {
-   "id": "c2b94d12-0b80-4ad3-88d4-fdddcd78c19e",
+   "id": "648b8257-ceeb-4c5a-9389-859599c6f85e",
    "name": "Responder 400",
    "type": "n8n-nodes-base.respondToWebhook",
    "typeVersion": 1.1,
@@ -155,7 +155,7 @@
    }
   },
   {
-   "id": "b84b6cd8-b5ea-468b-bbd6-c8dcc0caf925",
+   "id": "f0ae46f3-85e9-4125-a8f8-acb3a376e80e",
    "name": "Nota API",
    "type": "n8n-nodes-base.stickyNote",
    "typeVersion": 1,

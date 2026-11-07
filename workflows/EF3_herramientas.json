@@ -2,7 +2,7 @@
  "name": "Entrega final - Herramientas del agente",
  "nodes": [
   {
-   "id": "723429f9-b192-4b3b-b662-da166b4ea12b",
+   "id": "215d4d04-1627-491e-86f0-fdcba31cb539",
    "name": "Recibir pedido del agente",
    "type": "n8n-nodes-base.executeWorkflowTrigger",
    "typeVersion": 1.1,
@@ -40,7 +40,7 @@
    }
   },
   {
-   "id": "d347ccb7-4614-4bb3-a257-4c0f22e85b0c",
+   "id": "fee36f13-632f-4d92-b95b-ce846cfccffc",
    "name": "Hashear clave",
    "type": "n8n-nodes-base.crypto",
    "typeVersion": 1,
@@ -57,7 +57,7 @@
    }
   },
   {
-   "id": "f9a9561c-a603-4405-8bf2-a63576e99d1c",
+   "id": "443174b7-3570-4ab5-9197-30868373017f",
    "name": "Leer parámetros",
    "type": "n8n-nodes-base.googleSheets",
    "typeVersion": 4.5,
@@ -82,7 +82,7 @@
    "alwaysOutputData": true
   },
   {
-   "id": "4546ab30-bf31-4e5a-99b1-8a2ec1d7c2ee",
+   "id": "11420484-97ee-4276-9af3-3df4b62333ff",
    "name": "Leer transportistas",
    "type": "n8n-nodes-base.googleSheets",
    "typeVersion": 4.5,
@@ -107,7 +107,7 @@
    "alwaysOutputData": true
   },
   {
-   "id": "44e3a9ba-5ffb-4cea-ba8d-a6e450e98715",
+   "id": "e35dec13-3211-4f89-a7d0-ed68cfc63e7d",
    "name": "Leer facturas",
    "type": "n8n-nodes-base.googleSheets",
    "typeVersion": 4.5,
@@ -132,7 +132,7 @@
    "alwaysOutputData": true
   },
   {
-   "id": "7ecc35ec-8177-4265-8158-d3691b17c711",
+   "id": "e32010e7-b440-49dc-9ad9-01b1355d1004",
    "name": "Leer viajes",
    "type": "n8n-nodes-base.googleSheets",
    "typeVersion": 4.5,
@@ -157,7 +157,7 @@
    "alwaysOutputData": true
   },
   {
-   "id": "f028e491-2c85-43a4-8497-808ada5b1b87",
+   "id": "b16c749d-20ad-42fc-af1f-a1d23e1f9bc1",
    "name": "Leer libro",
    "type": "n8n-nodes-base.googleSheets",
    "typeVersion": 4.5,
@@ -182,7 +182,7 @@
    "alwaysOutputData": true
   },
   {
-   "id": "22a20b78-6c2c-42dd-b0b7-465b286ffa34",
+   "id": "5ed09e50-1ee8-4646-988f-dc1b55b9baf2",
    "name": "Leer sesiones",
    "type": "n8n-nodes-base.googleSheets",
    "typeVersion": 4.5,
@@ -207,7 +207,7 @@
    "alwaysOutputData": true
   },
   {
-   "id": "598254ca-2ae7-4872-8814-279aa6e805fc",
+   "id": "adea3ac1-24ed-4080-aeef-0202dd6e5080",
    "name": "Leer reclamos",
    "type": "n8n-nodes-base.googleSheets",
    "typeVersion": 4.5,
@@ -232,7 +232,7 @@
    "alwaysOutputData": true
   },
   {
-   "id": "83b572a2-1cf4-4bd0-be49-d796b6ec884d",
+   "id": "85f88ff0-0656-4a20-b78d-196d01701088",
    "name": "Leer feriados",
    "type": "n8n-nodes-base.googleSheets",
    "typeVersion": 4.5,
@@ -257,7 +257,7 @@
    "alwaysOutputData": true
   },
   {
-   "id": "ece72a70-9065-48b7-a097-177845b3df71",
+   "id": "cbfd4bbb-25c1-4808-88dd-1681974e66af",
    "name": "Resolver herramienta",
    "type": "n8n-nodes-base.code",
    "typeVersion": 2,
@@ -270,7 +270,7 @@
    }
   },
   {
-   "id": "abdbe0fb-d34d-492f-abad-f2b2fd5dc15a",
+   "id": "3c174430-88d6-4886-8bea-bd76b0ec444e",
    "name": "¿Qué hay que guardar?",
    "type": "n8n-nodes-base.switch",
    "typeVersion": 3.2,
@@ -359,7 +359,7 @@
    }
   },
   {
-   "id": "ce69816a-6a2a-4cae-a956-e061e534359b",
+   "id": "85862728-2c39-47fb-aa95-fe7b633edeb6",
    "name": "Abrir sesión",
    "type": "n8n-nodes-base.googleSheets",
    "typeVersion": 4.5,
@@ -447,7 +447,7 @@
    }
   },
   {
-   "id": "83a34578-f137-4cf2-a8eb-a4afed44742f",
+   "id": "b2f18100-9196-422d-8ee2-434286f5ab87",
    "name": "Reiniciar intentos",
    "type": "n8n-nodes-base.googleSheets",
    "typeVersion": 4.5,
@@ -506,7 +506,7 @@
    "executeOnce": true
   },
   {
-   "id": "0148f8c7-a1fd-413a-8712-9ef2c6a2ec32",
+   "id": "bd14b946-2a4e-44ea-81df-773c4283e120",
    "name": "Sumar intento fallido",
    "type": "n8n-nodes-base.googleSheets",
    "typeVersion": 4.5,
@@ -575,7 +575,7 @@
    "executeOnce": true
   },
   {
-   "id": "9a479dcb-01fd-413b-b631-ee1bd9793cdd",
+   "id": "848a71d1-4f5c-451e-8a42-cd7488233866",
    "name": "Registrar reclamo",
    "type": "n8n-nodes-base.googleSheets",
    "typeVersion": 4.5,
@@ -732,7 +732,7 @@
    "executeOnce": true
   },
   {
-   "id": "a493df13-8c35-4333-9d40-3624e4693930",
+   "id": "3e459bf6-193c-4e45-b666-25b54f299114",
    "name": "Avisar al analista",
    "type": "n8n-nodes-base.gmail",
    "typeVersion": 2.1,
@@ -749,10 +749,10 @@
      "appendAttribution": false
     }
    },
-   "webhookId": "32d3b858-1218-404b-85a2-605a62a616e0"
+   "webhookId": "b8c18c1f-8a53-4bda-be3a-932cb318afdb"
   },
   {
-   "id": "139c013b-5ec3-415b-b7a4-91b3ef28563e",
+   "id": "e05cae83-68e6-410e-aa44-e9ff4e030928",
    "name": "Devolver (sesión)",
    "type": "n8n-nodes-base.set",
    "typeVersion": 3.4,
@@ -767,7 +767,7 @@
    }
   },
   {
-   "id": "17751e78-53f2-41d0-afb5-16e8aabe08c2",
+   "id": "96d95b03-5111-4d73-92ae-ab82c8968b74",
    "name": "Devolver (intento)",
    "type": "n8n-nodes-base.set",
    "typeVersion": 3.4,
@@ -782,7 +782,7 @@
    }
   },
   {
-   "id": "9d49fb7d-9824-41e6-940d-fd2b89043770",
+   "id": "f7d665d1-9042-47e6-a742-d75e7a29f446",
    "name": "Devolver (reclamo)",
    "type": "n8n-nodes-base.set",
    "typeVersion": 3.4,
@@ -797,7 +797,7 @@
    }
   },
   {
-   "id": "1f0e5dab-f2c7-4e9f-9df0-e29bda089d51",
+   "id": "ddc9d808-5a8f-4fe1-b425-5b5116ecc90a",
    "name": "Devolver",
    "type": "n8n-nodes-base.set",
    "typeVersion": 3.4,
@@ -812,7 +812,7 @@
    }
   },
   {
-   "id": "cc40e404-b739-4a82-a015-043040774684",
+   "id": "b5e1b47e-3908-473f-94a3-bf287da69c3b",
    "name": "Nota herramientas",
    "type": "n8n-nodes-base.stickyNote",
    "typeVersion": 1,

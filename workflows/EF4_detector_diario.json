@@ -2,7 +2,7 @@
  "name": "Entrega final - Detector diario",
  "nodes": [
   {
-   "id": "da4935ed-6d97-47fa-a5dd-34c870f6804e",
+   "id": "bba6a346-f816-4d9a-85a2-45515255e641",
    "name": "Ejecución manual",
    "type": "n8n-nodes-base.manualTrigger",
    "typeVersion": 1,
@@ -13,7 +13,7 @@
    "parameters": {}
   },
   {
-   "id": "886bad37-75d9-4c40-b1d4-e9dbb76ff0e4",
+   "id": "dac9cde1-dfde-48b9-ae5f-f55b2361aa5a",
    "name": "Todos los días a las 8",
    "type": "n8n-nodes-base.scheduleTrigger",
    "typeVersion": 1.2,
@@ -32,7 +32,7 @@
    }
   },
   {
-   "id": "d0d75e38-7b90-4b09-ac28-59a90d544ea0",
+   "id": "f6966ad0-f6cf-4d6a-a787-9456f1782ac1",
    "name": "Leer parámetros",
    "type": "n8n-nodes-base.googleSheets",
    "typeVersion": 4.5,
@@ -58,7 +58,7 @@
    "onError": "continueErrorOutput"
   },
   {
-   "id": "41e38345-06a4-4e17-8fc9-a5198f7c14de",
+   "id": "87a80aff-3b8d-451a-ba5d-e9d1c13fcbb1",
    "name": "Leer facturas",
    "type": "n8n-nodes-base.googleSheets",
    "typeVersion": 4.5,
@@ -83,7 +83,7 @@
    "alwaysOutputData": true
   },
   {
-   "id": "0abcfc29-2107-4d40-8556-5c6b00fd66bb",
+   "id": "b7a6e650-39bd-4328-90c3-d5c1d1a32518",
    "name": "Leer viajes",
    "type": "n8n-nodes-base.googleSheets",
    "typeVersion": 4.5,
@@ -108,7 +108,7 @@
    "alwaysOutputData": true
   },
   {
-   "id": "eb876615-cb55-41e2-883c-f2847a58241b",
+   "id": "6b1f6623-187f-49b0-8f41-bc0e68c9cd01",
    "name": "Leer libro",
    "type": "n8n-nodes-base.googleSheets",
    "typeVersion": 4.5,
@@ -133,7 +133,7 @@
    "alwaysOutputData": true
   },
   {
-   "id": "5b1983dc-4dc7-4e14-9390-c41fd3dca17e",
+   "id": "a21d5548-4236-42e4-85e4-8f0b3ff67614",
    "name": "Leer reclamos",
    "type": "n8n-nodes-base.googleSheets",
    "typeVersion": 4.5,
@@ -158,7 +158,7 @@
    "alwaysOutputData": true
   },
   {
-   "id": "51be6b8f-17cf-422a-bb5c-d92b9939674f",
+   "id": "6850a149-ab93-4eff-9cea-eb6c3562e8ab",
    "name": "Leer cambios",
    "type": "n8n-nodes-base.googleSheets",
    "typeVersion": 4.5,
@@ -183,7 +183,7 @@
    "alwaysOutputData": true
   },
   {
-   "id": "648360c7-f054-4340-a1f8-1dfac03e5573",
+   "id": "2bea66d1-998a-45c4-9a2b-adc760a29c30",
    "name": "Leer transportistas",
    "type": "n8n-nodes-base.googleSheets",
    "typeVersion": 4.5,
@@ -208,7 +208,7 @@
    "alwaysOutputData": true
   },
   {
-   "id": "654b71db-c384-4141-b81b-983b9cf51d80",
+   "id": "accc82fc-2c55-4b4e-a8ef-e5bc6ed6660e",
    "name": "Armar pedido a la API",
    "type": "n8n-nodes-base.code",
    "typeVersion": 2,
@@ -222,7 +222,7 @@
    "executeOnce": true
   },
   {
-   "id": "1a0e0b13-58f2-4024-94de-057d68773db7",
+   "id": "50e12853-2c3b-4c40-8e4d-a94cd2b729c0",
    "name": "Consultar API de cargas",
    "type": "n8n-nodes-base.httpRequest",
    "typeVersion": 4.2,
@@ -253,7 +253,7 @@
    "waitBetweenTries": 5000
   },
   {
-   "id": "1c360f0b-2dac-43a5-8923-7e776e38ed36",
+   "id": "e7a09c4e-4923-4f7b-b231-d5b3fc2ef15a",
    "name": "¿La API respondió 200?",
    "type": "n8n-nodes-base.if",
    "typeVersion": 2.2,
@@ -271,7 +271,7 @@
      },
      "conditions": [
       {
-       "id": "67b18a59-3b2c-4373-be98-0d22443a0f1c",
+       "id": "aba408f1-ebb0-44af-ab85-b56d79c8a8fe",
        "leftValue": "={{ $json.statusCode }}",
        "rightValue": 200,
        "operator": {
@@ -286,7 +286,7 @@
    }
   },
   {
-   "id": "56e80efc-680c-40ff-b844-f1c261c35e8a",
+   "id": "00c01685-873f-4c2c-8372-775553d713c6",
    "name": "Armar aviso de control",
    "type": "n8n-nodes-base.set",
    "typeVersion": 3.4,
@@ -298,25 +298,25 @@
     "assignments": {
      "assignments": [
       {
-       "id": "4618c104-bb4d-47fe-8276-8f3669791df6",
+       "id": "6853cbe7-2455-494a-9551-e4309152aa1c",
        "name": "problema",
        "type": "string",
        "value": "={{ $json.statusCode ? 'La API de cargas respondió ' + $json.statusCode : 'No se pudo leer la planilla de atención' }}"
       },
       {
-       "id": "f97a709b-b052-4f37-b9b4-3b8f35954c95",
+       "id": "ae718f6b-9069-4933-b67d-37c6bbe82fb8",
        "name": "detalle",
        "type": "string",
        "value": "={{ $json.body?.error ?? $json.error?.message ?? $json.message ?? JSON.stringify($json).slice(0, 300) }}"
       },
       {
-       "id": "f7165874-6258-4739-8c1a-223602e8ad6a",
+       "id": "03d5feff-5bc8-4117-9ae7-53e3b0b06429",
        "name": "que_revisar",
        "type": "string",
        "value": "={{ {401: 'La API Key de la credencial Header Auth.', 403: 'La API Key de la credencial Header Auth.', 400: 'El formato del pedido (lista remitos).', 404: 'La URL url_api_cargas en Parametros y que la API esté publicada.', 503: 'Que la planilla Sistema de cargas exista y se pueda leer.'}[$json.statusCode] ?? 'Que la planilla exista, que la credencial de Google funcione y que el ID esté bien.' }}"
       },
       {
-       "id": "f30180b1-9a0c-4e78-9e69-9ce9e5f9a986",
+       "id": "e386f97d-2662-4edc-8785-053ac05f32f3",
        "name": "cuando",
        "type": "string",
        "value": "={{ $now.setZone('America/Argentina/Buenos_Aires').toFormat('dd/MM/yyyy HH:mm') }}"
@@ -327,7 +327,7 @@
    }
   },
   {
-   "id": "551a93dc-5884-4f02-aac7-e199dd7a3e84",
+   "id": "09ca9cdc-010c-4813-9124-a9adf48ba6de",
    "name": "Avisar falla por mail",
    "type": "n8n-nodes-base.gmail",
    "typeVersion": 2.1,
@@ -344,10 +344,10 @@
      "appendAttribution": false
     }
    },
-   "webhookId": "351822a7-0aaa-41d0-9735-355e3b164d96"
+   "webhookId": "65119f14-3b2d-44f6-97ba-594ef4027b37"
   },
   {
-   "id": "eb50d803-181e-4899-aad1-ca9dfffeaca0",
+   "id": "4aa940d1-4990-40d8-98ef-079439aea3f0",
    "name": "Control: detener ejecución",
    "type": "n8n-nodes-base.stopAndError",
    "typeVersion": 1,
@@ -360,7 +360,7 @@
    }
   },
   {
-   "id": "60d58529-d48f-4650-b250-8537c5d1a328",
+   "id": "a30e946a-f381-4ba2-9498-9e4611acf448",
    "name": "Cruzar viajes con cargas",
    "type": "n8n-nodes-base.code",
    "typeVersion": 2,
@@ -373,7 +373,7 @@
    }
   },
   {
-   "id": "569ada80-62ee-4039-8464-af6528e58d0c",
+   "id": "7cc37365-a544-4bef-8ade-3874b2e82032",
    "name": "Un caso por vez (IA)",
    "type": "n8n-nodes-base.splitOut",
    "typeVersion": 1,
@@ -387,7 +387,7 @@
    }
   },
   {
-   "id": "ebf4db46-2d53-4f63-a450-fcdac9927614",
+   "id": "6bb90674-6693-4df8-9883-11ab3a808e05",
    "name": "Clasificar con IA",
    "type": "@n8n/n8n-nodes-langchain.chainLlm",
    "typeVersion": 1.7,
@@ -417,7 +417,7 @@
    "onError": "continueRegularOutput"
   },
   {
-   "id": "0db02403-88e3-4eb2-94c1-003377ce8c50",
+   "id": "da52875e-1f87-40e2-87d9-1303cfca66db",
    "name": "Gemini (clasificar)",
    "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
    "typeVersion": 1,
@@ -434,7 +434,7 @@
    }
   },
   {
-   "id": "fa68f7a5-0080-430f-8320-08e890b6766f",
+   "id": "2233bd14-b9da-41b1-8636-03bb5f44d343",
    "name": "Controlar clasificación",
    "type": "n8n-nodes-base.code",
    "typeVersion": 2,
@@ -448,7 +448,7 @@
    }
   },
   {
-   "id": "a6561512-3a95-43fc-8f2c-4aedc4639be8",
+   "id": "281700f7-fe6f-4aca-b4f4-8a3884bc5dfc",
    "name": "Casos por regla",
    "type": "n8n-nodes-base.splitOut",
    "typeVersion": 1,
@@ -462,7 +462,7 @@
    }
   },
   {
-   "id": "3cba951c-d8aa-4d58-b438-07d80f3a9e9f",
+   "id": "e274bf51-0842-49af-9288-3571f16fa680",
    "name": "Preparar fila del libro",
    "type": "n8n-nodes-base.code",
    "typeVersion": 2,
@@ -475,7 +475,7 @@
    }
   },
   {
-   "id": "473a1bbd-2efa-4c54-a471-e81fead8b313",
+   "id": "451c1150-0737-42b0-8953-d2f46c798d79",
    "name": "Agregar casos al libro",
    "type": "n8n-nodes-base.googleSheets",
    "typeVersion": 4.5,
@@ -507,7 +507,7 @@
    }
   },
   {
-   "id": "d048c7df-6b1e-4d77-ac80-3943f65a8f81",
+   "id": "ceba0d1c-eb72-4fa6-a7fb-b8ff14d3982f",
    "name": "Casos con nueva prioridad",
    "type": "n8n-nodes-base.splitOut",
    "typeVersion": 1,
@@ -521,7 +521,7 @@
    }
   },
   {
-   "id": "25dfcf44-deed-4ee0-844d-8661d0228405",
+   "id": "1691754a-e11c-45fa-a81c-da7fa83fe2ee",
    "name": "Actualizar prioridad en el libro",
    "type": "n8n-nodes-base.googleSheets",
    "typeVersion": 4.5,
@@ -555,7 +555,7 @@
    }
   },
   {
-   "id": "1cfad904-c130-4c3e-ae9e-e98ab4f0ad1d",
+   "id": "6667b65c-ca7f-4b53-8b70-1b87c908dd0d",
    "name": "Armar mail de prioridad",
    "type": "n8n-nodes-base.code",
    "typeVersion": 2,
@@ -564,11 +564,11 @@
     20
    ],
    "parameters": {
-    "jsCode": "// Un solo mail al analista con todos los casos que pasaron a prioridad máxima en esta ejecución.\nconst casos = $json.avisos_prioridad ?? [];\nif (casos.length === 0) return [];\nconst filas = casos.map(c => `<tr><td>${c.id_caso}</td><td>${c.nro_comprobante}</td><td>${c.transportista}</td><td>${c.id_reclamo}</td><td>${c.dias_a_vencer}</td><td>${c.estado_carga_api}</td><td>${c.detalle_reclamo}</td></tr>`).join('');\nreturn [{ json: {\n  asunto: `[Soporte] ${casos.length} caso(s) con reclamo del transportista: prioridad máxima`,\n  html: `<div style=\"font-family:Arial,sans-serif;font-size:14px\"><p>Estos casos tienen un reclamo abierto del transportista y pasaron a prioridad <b>0 · Reclamada</b>:</p>\n<table cellpadding=\"6\" border=\"1\" style=\"border-collapse:collapse\"><tr style=\"background:#f3f3f3\"><th>Caso</th><th>Comprobante</th><th>Transportista</th><th>Reclamo</th><th>Días a vencer</th><th>Carga</th><th>Lo que dijo el transportista</th></tr>${filas}</table>\n<p>Cuando lo resuelvas, escribí la respuesta en la hoja Reclamos (columna respuesta_analista) y poné el estado en Resuelto. El aviso al transportista sale solo.</p></div>` } }];\n"
+    "jsCode": "// Un solo mail al analista con todos los casos que pasaron a prioridad máxima en esta ejecución.\nconst casos = $json.avisos_prioridad ?? [];\nif (casos.length === 0) return [];\n// Lo que escribió el transportista se escapa: así no puede meter links ni etiquetas HTML en el mail del analista\nconst esc = v => String(v ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/\"/g, '&quot;');\nconst filas = casos.map(c => `<tr><td>${esc(c.id_caso)}</td><td>${esc(c.nro_comprobante)}</td><td>${esc(c.transportista)}</td><td>${esc(c.id_reclamo)}</td><td>${esc(c.dias_a_vencer)}</td><td>${esc(c.estado_carga_api)}</td><td>${esc(c.detalle_reclamo)}</td></tr>`).join('');\nreturn [{ json: {\n  asunto: `[Soporte] ${casos.length} caso(s) con reclamo del transportista: prioridad máxima`,\n  html: `<div style=\"font-family:Arial,sans-serif;font-size:14px\"><p>Estos casos tienen un reclamo abierto del transportista y pasaron a prioridad <b>0 · Reclamada</b>:</p>\n<table cellpadding=\"6\" border=\"1\" style=\"border-collapse:collapse\"><tr style=\"background:#f3f3f3\"><th>Caso</th><th>Comprobante</th><th>Transportista</th><th>Reclamo</th><th>Días a vencer</th><th>Carga</th><th>Lo que dijo el transportista</th></tr>${filas}</table>\n<p>Cuando lo resuelvas, escribí la respuesta en la hoja Reclamos (columna respuesta_analista) y poné el estado en Resuelto. El aviso al transportista sale solo.</p></div>` } }];\n"
    }
   },
   {
-   "id": "28390bc6-0385-4470-ade7-5328b1647e62",
+   "id": "07b6ad1e-39fe-479e-a4c3-e917e6438994",
    "name": "Avisar prioridad al analista",
    "type": "n8n-nodes-base.gmail",
    "typeVersion": 2.1,
@@ -585,10 +585,10 @@
      "appendAttribution": false
     }
    },
-   "webhookId": "f09282d1-5883-4fd6-bbef-69bd1f680387"
+   "webhookId": "deddb57a-adf6-4c33-8ca7-e9bfa096ed2a"
   },
   {
-   "id": "0ea4dc6a-b77a-4cf7-a462-3465bb9105d1",
+   "id": "8ba521f1-aed6-4346-b8b3-4b96b6c73bea",
    "name": "Casos a cerrar",
    "type": "n8n-nodes-base.splitOut",
    "typeVersion": 1,
@@ -602,7 +602,7 @@
    }
   },
   {
-   "id": "2a8aad05-ad8a-410f-8a65-f251ee7098b5",
+   "id": "ba524022-c728-4b17-903f-04ea0c9c18c8",
    "name": "Cerrar casos en el libro",
    "type": "n8n-nodes-base.googleSheets",
    "typeVersion": 4.5,
@@ -636,7 +636,7 @@
    }
   },
   {
-   "id": "49ca8e03-c22a-4298-bc0a-7c4725c0fc8f",
+   "id": "7020e95a-dd28-4186-a364-3ae784860b43",
    "name": "Cambios nuevos",
    "type": "n8n-nodes-base.splitOut",
    "typeVersion": 1,
@@ -650,7 +650,7 @@
    }
   },
   {
-   "id": "836fc81d-a2d8-4d57-87d6-042efd066392",
+   "id": "d135cec8-cedf-4e58-ae64-1b4d7c3b272b",
    "name": "Registrar cambio de transporte",
    "type": "n8n-nodes-base.googleSheets",
    "typeVersion": 4.5,
@@ -682,7 +682,7 @@
    }
   },
   {
-   "id": "eea1f17e-62d1-4efc-a7ef-84973cb71594",
+   "id": "a475d4c0-6465-47e3-8322-87fe9ba7f280",
    "name": "Reclamos a actualizar",
    "type": "n8n-nodes-base.splitOut",
    "typeVersion": 1,
@@ -696,7 +696,7 @@
    }
   },
   {
-   "id": "1410f94c-68ea-4617-afd0-5418496ccb72",
+   "id": "aed86e16-035f-4a9a-ac2f-67f94f8ef467",
    "name": "Actualizar reclamos",
    "type": "n8n-nodes-base.googleSheets",
    "typeVersion": 4.5,
@@ -730,7 +730,7 @@
    }
   },
   {
-   "id": "b1651a68-58ae-4e9d-a404-1ff9e0de8cc1",
+   "id": "87bc28d6-6387-434a-acd8-7c29eae1cd51",
    "name": "Un reclamo por vez",
    "type": "n8n-nodes-base.splitOut",
    "typeVersion": 1,
@@ -744,7 +744,7 @@
    }
   },
   {
-   "id": "44e5902b-9416-46eb-9f0a-97a2faeedd80",
+   "id": "42f8c6e2-97b5-44a0-b109-51da5e9d288e",
    "name": "Redactar respuesta de cierre",
    "type": "@n8n/n8n-nodes-langchain.chainLlm",
    "typeVersion": 1.7,
@@ -774,7 +774,7 @@
    "onError": "continueRegularOutput"
   },
   {
-   "id": "91c6579e-a8ab-44f8-9326-bc11cbb652fe",
+   "id": "a4f40220-e32d-48f5-8da4-8af317ebc99e",
    "name": "Gemini (redactar)",
    "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
    "typeVersion": 1,
@@ -791,7 +791,7 @@
    }
   },
   {
-   "id": "ba618f72-daaf-4631-9be0-468142822c18",
+   "id": "ff7130ab-5747-4567-be9f-8929ffff93c7",
    "name": "Controlar respuesta",
    "type": "n8n-nodes-base.code",
    "typeVersion": 2,
@@ -800,12 +800,12 @@
     680
    ],
    "parameters": {
-    "jsCode": "// Controla el mail que redactó la IA antes de mandarlo. Si algo no cierra, sale una plantilla fija.\n// Contrato: la IA devuelve solo el texto. Este nodo agrega asunto, cuerpo_html, control_respuesta y para.\nconst r = $('Un reclamo por vez').item.json;\nconst P = Object.fromEntries($('Leer parámetros').all().map(i => [i.json.parametro, i.json.valor]));\nconst texto = String($json.text ?? '').trim();\nconst fuente = [r.respuesta_analista, r.nro_comprobante, r.id_reclamo, r.fecha_alta, r.detalle, r.razon_social].join(' ');\n\nconst problemas = [];\nconst palabras = texto.split(/\\s+/).filter(Boolean).length;\nif (palabras < 30 || palabras > 200) problemas.push(`largo fuera de rango (${palabras} palabras)`);\nif (/\\b(T|TMS|F|V)-\\d+/.test(texto)) problemas.push('menciona códigos internos');\nif (!texto.includes(r.id_reclamo)) problemas.push('no nombra el reclamo');\n// Fechas y montos: todo número de 4 o más cifras del mail tiene que estar en los datos de entrada.\nconst numeros = texto.match(/\\d[\\d.,\\/-]{3,}\\d/g) ?? [];\nconst inventados = numeros.filter(n => !fuente.replace(/\\D/g, ' ').includes(n.replace(/\\D/g, '')) && !fuente.includes(n));\nif (inventados.length) problemas.push('números que no están en los datos: ' + inventados.join(', '));\n\nconst plantilla = `Estimados ${r.razon_social}:\\n\\nLe informamos que el reclamo ${r.id_reclamo}, referido al comprobante ${r.nro_comprobante}, fue resuelto.\\n\\nResolución: ${r.respuesta_analista}\\n\\nSi tiene alguna duda, puede responder este mail o escribirnos por WhatsApp.`;\nconst cuerpo = problemas.length ? plantilla : texto;\nconst firma = '\\n\\nSaludos cordiales,\\nAtención al transportista';\nconst html = (cuerpo + firma).split(/\\n{2,}/).map(p => `<p>${p.replace(/\\n/g, '<br>')}</p>`).join('');\n\n// En modo prueba todos los mails van a la casilla de prueba (parámetro mail_transportista_prueba).\nconst prueba = P.mail_transportista_prueba && !String(P.mail_transportista_prueba).startsWith('TU_');\nreturn { json: { ...r, para: prueba ? P.mail_transportista_prueba : r.email_contacto,\n  asunto: `Reclamo ${r.id_reclamo} resuelto · comprobante ${r.nro_comprobante}`, cuerpo_html: html,\n  control_respuesta: problemas.length ? 'Plantilla fija: ' + problemas.join('; ') : 'OK' } };\n",
+    "jsCode": "// Controla el mail que redactó la IA antes de mandarlo. Si algo no cierra, sale una plantilla fija.\n// Contrato: la IA devuelve solo el texto. Este nodo agrega asunto, cuerpo_html, control_respuesta y para.\nconst r = $('Un reclamo por vez').item.json;\nconst P = Object.fromEntries($('Leer parámetros').all().map(i => [i.json.parametro, i.json.valor]));\nconst texto = String($json.text ?? '').trim();\nconst fuente = [r.respuesta_analista, r.nro_comprobante, r.id_reclamo, r.fecha_alta, r.detalle, r.razon_social].join(' ');\n\nconst problemas = [];\nconst palabras = texto.split(/\\s+/).filter(Boolean).length;\nif (palabras < 30 || palabras > 200) problemas.push(`largo fuera de rango (${palabras} palabras)`);\nif (/\\b(T|TMS|F|V)-\\d+/.test(texto)) problemas.push('menciona códigos internos');\nif (!texto.includes(r.id_reclamo)) problemas.push('no nombra el reclamo');\n// Fechas y montos: todo número de 4 o más cifras del mail tiene que estar en los datos de entrada.\nconst numeros = texto.match(/\\d[\\d.,\\/-]{3,}\\d/g) ?? [];\nconst inventados = numeros.filter(n => !fuente.replace(/\\D/g, ' ').includes(n.replace(/\\D/g, '')) && !fuente.includes(n));\nif (inventados.length) problemas.push('números que no están en los datos: ' + inventados.join(', '));\n\nconst plantilla = `Estimados ${r.razon_social}:\\n\\nLe informamos que el reclamo ${r.id_reclamo}, referido al comprobante ${r.nro_comprobante}, fue resuelto.\\n\\nResolución: ${r.respuesta_analista}\\n\\nSi tiene alguna duda, puede responder este mail o escribirnos por WhatsApp.`;\nconst cuerpo = problemas.length ? plantilla : texto;\nconst firma = '\\n\\nSaludos cordiales,\\nAtención al transportista';\n// Se escapa el texto (de la IA o del analista) para que ninguna etiqueta HTML llegue al mail del transportista\nconst esc = v => String(v ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/\"/g, '&quot;');\nconst html = esc(cuerpo + firma).split(/\\n{2,}/).map(p => `<p>${p.replace(/\\n/g, '<br>')}</p>`).join('');\n\n// En modo prueba todos los mails van a la casilla de prueba (parámetro mail_transportista_prueba).\nconst prueba = P.mail_transportista_prueba && !String(P.mail_transportista_prueba).startsWith('TU_');\nreturn { json: { ...r, para: prueba ? P.mail_transportista_prueba : r.email_contacto,\n  asunto: `Reclamo ${r.id_reclamo} resuelto · comprobante ${r.nro_comprobante}`, cuerpo_html: html,\n  control_respuesta: problemas.length ? 'Plantilla fija: ' + problemas.join('; ') : 'OK' } };\n",
     "mode": "runOnceForEachItem"
    }
   },
   {
-   "id": "00007716-6d93-44bf-8a02-0b4e8e90ec81",
+   "id": "404955e3-5bef-42d7-a23b-8e09252897ab",
    "name": "Mandar respuesta al transportista",
    "type": "n8n-nodes-base.gmail",
    "typeVersion": 2.1,
@@ -822,10 +822,10 @@
      "appendAttribution": false
     }
    },
-   "webhookId": "06ae9cff-6a85-400c-a454-49fb316bdcba"
+   "webhookId": "a5f44645-f5b6-4c76-a351-776edb06d60b"
   },
   {
-   "id": "bca50807-9070-4fb3-84fa-8c8657d75326",
+   "id": "57cf00a0-f0c0-4362-8021-7823c4a4447f",
    "name": "Marcar aviso enviado",
    "type": "n8n-nodes-base.set",
    "typeVersion": 3.4,
@@ -837,19 +837,19 @@
     "assignments": {
      "assignments": [
       {
-       "id": "964394d5-58e9-4b38-b11a-1840a00e1d62",
+       "id": "6de4c951-f40a-405e-98b5-61785fdc3009",
        "name": "id_reclamo",
        "type": "string",
        "value": "={{ $('Controlar respuesta').item.json.id_reclamo }}"
       },
       {
-       "id": "ef7d87ad-f311-43fd-b337-611159a676f6",
+       "id": "57876dfd-bfd2-4059-a757-c5e43be14a2a",
        "name": "aviso_enviado",
        "type": "string",
        "value": "={{ $now.setZone('America/Argentina/Buenos_Aires').toFormat('yyyy-MM-dd HH:mm') }}"
       },
       {
-       "id": "71433324-8c2d-4762-bc43-548d41a869f7",
+       "id": "4aabad14-c925-4f99-965d-8d232f1dae67",
        "name": "control_aviso",
        "type": "string",
        "value": "={{ $('Controlar respuesta').item.json.control_respuesta }}"
@@ -860,7 +860,7 @@
    }
   },
   {
-   "id": "b27a8a6e-2218-4d48-9cb4-928db7a07f69",
+   "id": "095d255b-a90d-48b1-b852-7d909dcbfa8a",
    "name": "Guardar aviso en reclamos",
    "type": "n8n-nodes-base.googleSheets",
    "typeVersion": 4.5,
@@ -894,7 +894,7 @@
    }
   },
   {
-   "id": "b83f7b12-e5af-4c13-b8be-7ef3c07eecb9",
+   "id": "765f07c3-540c-4a7d-87f9-3831ecae6ea0",
    "name": "Resumen de la ejecución",
    "type": "n8n-nodes-base.set",
    "typeVersion": 3.4,
@@ -909,7 +909,7 @@
    }
   },
   {
-   "id": "41eec3cd-2bcd-40dc-a9a0-b3da5775bddb",
+   "id": "891ea769-c7ab-438d-9f31-458e2daca8e6",
    "name": "Nota 41",
    "type": "n8n-nodes-base.stickyNote",
    "typeVersion": 1,
@@ -925,7 +925,7 @@
    }
   },
   {
-   "id": "d5f6b014-8ce1-4230-ad05-02a81da3262a",
+   "id": "e6047891-38ff-4e09-adc6-a8841205f065",
    "name": "Nota 42",
    "type": "n8n-nodes-base.stickyNote",
    "typeVersion": 1,
@@ -941,7 +941,7 @@
    }
   },
   {
-   "id": "6a966cea-d623-4395-914b-bfe2541277d2",
+   "id": "cca445ff-efec-421e-8ecb-ac4dcd1c18cc",
    "name": "Nota 43",
    "type": "n8n-nodes-base.stickyNote",
    "typeVersion": 1,
@@ -957,7 +957,7 @@
    }
   },
   {
-   "id": "01a2900a-c233-4d82-aa76-ed6b8158d10b",
+   "id": "59ac5d09-d69e-472a-a45d-51e1792a8f70",
    "name": "Nota 44",
    "type": "n8n-nodes-base.stickyNote",
    "typeVersion": 1,
@@ -973,7 +973,7 @@
    }
   },
   {
-   "id": "2b2e146a-42f8-4797-9f07-68ea167a766e",
+   "id": "80aad64a-cf0e-49b7-9438-da17ad811b0c",
    "name": "Nota 45",
    "type": "n8n-nodes-base.stickyNote",
    "typeVersion": 1,

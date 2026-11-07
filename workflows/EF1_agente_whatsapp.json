@@ -2,7 +2,7 @@
  "name": "Entrega final - Agente de WhatsApp",
  "nodes": [
   {
-   "id": "c2233129-5ccb-4892-974d-c88898cbf4b5",
+   "id": "54bfc59f-6094-49c1-87ab-83934a3c107b",
    "name": "WhatsApp Trigger",
    "type": "n8n-nodes-base.whatsAppTrigger",
    "typeVersion": 1,
@@ -18,7 +18,7 @@
    }
   },
   {
-   "id": "a70ad546-5334-41ae-b4ad-921aed29ee67",
+   "id": "4d903bfb-a196-4036-ab5b-ad58603480b9",
    "name": "Preparar mensaje",
    "type": "n8n-nodes-base.code",
    "typeVersion": 2,
@@ -31,7 +31,7 @@
    }
   },
   {
-   "id": "a25e35a6-3533-4a30-9f1e-8721d5740276",
+   "id": "91995e7e-a914-4d60-b530-d7c1f15a5c3d",
    "name": "¿Es texto?",
    "type": "n8n-nodes-base.if",
    "typeVersion": 2.2,
@@ -63,7 +63,7 @@
    }
   },
   {
-   "id": "d8dc7ef9-9df6-4316-ae35-47016d10f223",
+   "id": "c0c5aec5-2e21-4017-b8c3-efbb8c854f20",
    "name": "Responder: solo texto",
    "type": "n8n-nodes-base.whatsApp",
    "typeVersion": 1.1,
@@ -80,7 +80,7 @@
    }
   },
   {
-   "id": "afcf3b6e-fc83-404f-bec5-8bfb96e2c968",
+   "id": "68a8e545-1ff3-4adf-b9f8-c60f662bb5b6",
    "name": "Leer sesión",
    "type": "n8n-nodes-base.googleSheets",
    "typeVersion": 4.5,
@@ -113,7 +113,7 @@
    "executeOnce": true
   },
   {
-   "id": "2764d986-5659-4db5-a65c-a1c438a8582c",
+   "id": "f739c6c3-8b3a-48dc-97ca-e7b2215fae9e",
    "name": "Contexto de sesión",
    "type": "n8n-nodes-base.code",
    "typeVersion": 2,
@@ -126,7 +126,7 @@
    }
   },
   {
-   "id": "2f77742d-d671-4e21-a70c-d27a38e3d99c",
+   "id": "19225c50-4831-4704-9540-68c1b721ff9f",
    "name": "Agente de WhatsApp",
    "type": "@n8n/n8n-nodes-langchain.agent",
    "typeVersion": 2.2,
@@ -149,7 +149,7 @@
    "waitBetweenTries": 3000
   },
   {
-   "id": "6d790c6f-c630-47ff-8eae-2911264f484e",
+   "id": "53c6c1f8-bec0-43a5-b29f-af45f9d34b16",
    "name": "Gemini",
    "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
    "typeVersion": 1,
@@ -165,7 +165,7 @@
    }
   },
   {
-   "id": "f24a413e-b169-41f6-b9e7-349b87b97814",
+   "id": "88d22dd9-f638-40c1-97b7-7db949a50e8f",
    "name": "Memoria por teléfono",
    "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
    "typeVersion": 1.3,
@@ -180,7 +180,7 @@
    }
   },
   {
-   "id": "94622ec0-8990-488a-81ff-1b91bc50b82d",
+   "id": "22d96da4-4995-466f-9559-3309ada28db3",
    "name": "validar_identidad",
    "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
    "typeVersion": 2.2,
@@ -275,7 +275,7 @@
    }
   },
   {
-   "id": "fbde0bfc-279d-435a-bafb-63734cf4d4ba",
+   "id": "0c14c52b-7908-4b52-ad63-ee1d1ca0919d",
    "name": "consultar_factura",
    "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
    "typeVersion": 2.2,
@@ -370,7 +370,7 @@
    }
   },
   {
-   "id": "d26c4156-33ce-4513-92cb-c929f709826f",
+   "id": "8eec7047-8b53-4231-b5da-8fcc6a89ff69",
    "name": "listar_pendientes",
    "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
    "typeVersion": 2.2,
@@ -464,7 +464,7 @@
    }
   },
   {
-   "id": "97763d1d-0104-460b-8cb4-c7a4f94e806c",
+   "id": "c287e3ea-961c-4510-b8c0-7df7c6c99f71",
    "name": "abrir_reclamo",
    "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
    "typeVersion": 2.2,
@@ -562,7 +562,7 @@
    }
   },
   {
-   "id": "1f21c464-a519-404e-98ea-de6524e22193",
+   "id": "74e04848-2e04-4a8c-9670-ae3d801b18a0",
    "name": "Controlar respuesta",
    "type": "n8n-nodes-base.code",
    "typeVersion": 2,
@@ -575,7 +575,7 @@
    }
   },
   {
-   "id": "e73ab182-829c-4435-b7d6-f46df8cbca99",
+   "id": "80e166c9-e62c-4e1d-867f-591415b51bdc",
    "name": "Responder por WhatsApp",
    "type": "n8n-nodes-base.whatsApp",
    "typeVersion": 1.1,
@@ -592,7 +592,7 @@
    }
   },
   {
-   "id": "01693f4a-3297-4400-b7ab-07d1cf47f4da",
+   "id": "fce1b449-72d4-4b20-a481-6e9455611368",
    "name": "Registrar en el log",
    "type": "n8n-nodes-base.googleSheets",
    "typeVersion": 4.5,
@@ -728,7 +728,7 @@
    }
   },
   {
-   "id": "e3947a81-63bd-45a6-bbce-f2f6fc3a6f21",
+   "id": "668a85d5-37e5-452d-9054-952173576fd4",
    "name": "¿Hubo que reemplazar la respuesta?",
    "type": "n8n-nodes-base.if",
    "typeVersion": 2.2,
@@ -761,7 +761,7 @@
    }
   },
   {
-   "id": "7541a408-4067-4185-bc5c-32c329abd69a",
+   "id": "6fa2e3e0-695f-49c6-a475-716a3fa27f3f",
    "name": "Avisar falla al analista",
    "type": "n8n-nodes-base.gmail",
    "typeVersion": 2.1,
@@ -780,7 +780,7 @@
    }
   },
   {
-   "id": "83b9d9b2-5710-4966-b193-6556668c8eac",
+   "id": "1423718d-a880-4fa7-8598-53493327a473",
    "name": "Nota clave",
    "type": "n8n-nodes-base.stickyNote",
    "typeVersion": 1,
@@ -796,7 +796,7 @@
    }
   },
   {
-   "id": "788d028a-22c9-48f7-93ef-aec8a10057ba",
+   "id": "4b195f57-fa1a-47f7-9676-70cc0507f068",
    "name": "Nota control",
    "type": "n8n-nodes-base.stickyNote",
    "typeVersion": 1,
@@ -812,7 +812,7 @@
    }
   },
   {
-   "id": "af02ebfc-484d-46f3-ba28-b2f3c87c8ee2",
+   "id": "bc42ff1a-66d8-47a1-b46d-7ca03b9c62fd",
    "name": "¿Sesión vencida?",
    "type": "n8n-nodes-base.if",
    "typeVersion": 2.2,
@@ -846,7 +846,7 @@
    }
   },
   {
-   "id": "4637f4b2-0998-4db6-9602-2b10140c53fe",
+   "id": "aa3fc2dd-3950-41b8-a5ac-41913ff2f882",
    "name": "Marcar sesión vencida",
    "type": "n8n-nodes-base.googleSheets",
    "typeVersion": 4.5,
@@ -902,7 +902,7 @@
    }
   },
   {
-   "id": "66953d3d-870a-4602-876f-ef7a4790e149",
+   "id": "081b6e9e-b95e-4df2-b05b-12c10f86b208",
    "name": "Borrar memoria (vencida)",
    "type": "@n8n/n8n-nodes-langchain.memoryManager",
    "typeVersion": 1.1,
@@ -916,7 +916,7 @@
    }
   },
   {
-   "id": "5b88a2d2-7f28-4286-80aa-06f533757eb8",
+   "id": "b42b9f9b-f03c-48ea-93cd-9106745b25de",
    "name": "¿Cerró la sesión?",
    "type": "n8n-nodes-base.if",
    "typeVersion": 2.2,
@@ -950,7 +950,7 @@
    }
   },
   {
-   "id": "824da91c-9f66-402f-b48b-b5cbface3d3e",
+   "id": "4c9dff02-3f7b-4c2b-9f78-19855e8895c3",
    "name": "Cerrar sesión",
    "type": "n8n-nodes-base.googleSheets",
    "typeVersion": 4.5,
@@ -1016,7 +1016,7 @@
    }
   },
   {
-   "id": "03c40696-7bd6-4ebc-81f1-24038d6fec5c",
+   "id": "18c490bc-cc3a-42f9-aae6-dd2eaa19c213",
    "name": "Borrar memoria (cierre)",
    "type": "@n8n/n8n-nodes-langchain.memoryManager",
    "typeVersion": 1.1,
@@ -1030,7 +1030,7 @@
    }
   },
   {
-   "id": "ff5dd0dc-acc0-4b10-94a5-b3bb15a694f0",
+   "id": "91ab86bf-bb48-44b3-bbbe-6a2cfa7458a5",
    "name": "Nota sesión",
    "type": "n8n-nodes-base.stickyNote",
    "typeVersion": 1,

@@ -2,7 +2,7 @@
  "name": "Entrega final - Formulario de atención",
  "nodes": [
   {
-   "id": "08a32bfc-6f22-46fe-9497-f596f5d61561",
+   "id": "624e501c-6894-441c-983e-f3be7866f2eb",
    "name": "Formulario",
    "type": "n8n-nodes-base.formTrigger",
    "typeVersion": 2.2,
@@ -58,10 +58,10 @@
      "appendAttribution": false
     }
    },
-   "webhookId": "b97e0c72-ac2a-499c-a28d-443d6bf1b16e"
+   "webhookId": "134fb19f-9fe0-440d-906a-65fa2670006c"
   },
   {
-   "id": "ad9e2ea4-ad67-41df-829c-345d70504b07",
+   "id": "28490f0b-d247-4428-a55b-d91df197ec1e",
    "name": "Hashear clave",
    "type": "n8n-nodes-base.crypto",
    "typeVersion": 1,
@@ -78,7 +78,7 @@
    }
   },
   {
-   "id": "c3894ec2-5696-4e81-b41e-49cdb858eef6",
+   "id": "3e876f06-822e-4b7a-afaf-782e6e7af5e9",
    "name": "Leer parámetros",
    "type": "n8n-nodes-base.googleSheets",
    "typeVersion": 4.5,
@@ -103,7 +103,7 @@
    "alwaysOutputData": true
   },
   {
-   "id": "c7501a45-541f-4292-9b09-be8fa936060e",
+   "id": "495d3d0b-c582-4e0b-9ec4-4dd021796850",
    "name": "Leer transportistas",
    "type": "n8n-nodes-base.googleSheets",
    "typeVersion": 4.5,
@@ -128,7 +128,7 @@
    "alwaysOutputData": true
   },
   {
-   "id": "93801ac9-367d-4558-be99-4b14c409b8e1",
+   "id": "e35537c3-622f-4ff2-909e-285778990e2b",
    "name": "Leer facturas",
    "type": "n8n-nodes-base.googleSheets",
    "typeVersion": 4.5,
@@ -153,7 +153,7 @@
    "alwaysOutputData": true
   },
   {
-   "id": "67254a4c-443d-4e8c-bf04-603ab69bf43f",
+   "id": "65ec844d-b135-49b0-bc5a-83520b5690aa",
    "name": "Leer viajes",
    "type": "n8n-nodes-base.googleSheets",
    "typeVersion": 4.5,
@@ -178,7 +178,7 @@
    "alwaysOutputData": true
   },
   {
-   "id": "1afa391a-b35a-45a3-bc53-88067fd51a8a",
+   "id": "3e1855a9-7fb2-4908-ba7b-71a4d723297f",
    "name": "Leer libro",
    "type": "n8n-nodes-base.googleSheets",
    "typeVersion": 4.5,
@@ -203,7 +203,7 @@
    "alwaysOutputData": true
   },
   {
-   "id": "779d4997-aa22-4644-8467-6dc49ef1c576",
+   "id": "c6340162-bd39-4f12-9283-cbcb7ddbba81",
    "name": "Leer reclamos",
    "type": "n8n-nodes-base.googleSheets",
    "typeVersion": 4.5,
@@ -228,7 +228,7 @@
    "alwaysOutputData": true
   },
   {
-   "id": "6ddf2b2f-684a-40f0-8891-16c1b8ec2e8a",
+   "id": "e9b7bbd6-29a6-4e82-8081-07c39627e00b",
    "name": "Leer feriados",
    "type": "n8n-nodes-base.googleSheets",
    "typeVersion": 4.5,
@@ -253,7 +253,7 @@
    "alwaysOutputData": true
   },
   {
-   "id": "23f5c2de-2ed7-4c9c-b242-3c98fcfb2890",
+   "id": "6e4d438e-6381-4bc1-94aa-87549ce906da",
    "name": "Validar y armar hechos",
    "type": "n8n-nodes-base.code",
    "typeVersion": 2,
@@ -266,7 +266,7 @@
    }
   },
   {
-   "id": "01130a46-1667-4ce8-a126-0b130fbcd209",
+   "id": "dd87d905-29d8-4619-966a-0226621559ab",
    "name": "¿Identidad válida?",
    "type": "n8n-nodes-base.if",
    "typeVersion": 2.2,
@@ -284,7 +284,7 @@
      },
      "conditions": [
       {
-       "id": "e5462aee-056e-4d01-8b7b-c17b58ab6792",
+       "id": "1723a7ff-7850-4700-88a6-1b927591aa4c",
        "leftValue": "={{ $json.ok }}",
        "rightValue": true,
        "operator": {
@@ -300,7 +300,7 @@
    }
   },
   {
-   "id": "4baeed37-9b66-4cb4-aba8-cf9e174a3405",
+   "id": "dbd30f24-51ec-438e-9887-953a439cae5b",
    "name": "¿Sumar intento fallido?",
    "type": "n8n-nodes-base.if",
    "typeVersion": 2.2,
@@ -318,7 +318,7 @@
      },
      "conditions": [
       {
-       "id": "47f5ffb4-5435-4f1d-b1bd-3be210aa0417",
+       "id": "dd154619-486e-495f-b1e5-9f5b930da322",
        "leftValue": "={{ !!$json.intento }}",
        "rightValue": true,
        "operator": {
@@ -334,7 +334,7 @@
    }
   },
   {
-   "id": "abad4825-8f2c-45ae-9bc9-d742ed27131b",
+   "id": "65353297-367b-4317-a163-661b46c527fd",
    "name": "Intento",
    "type": "n8n-nodes-base.set",
    "typeVersion": 3.4,
@@ -349,7 +349,7 @@
    }
   },
   {
-   "id": "478ac10f-f5aa-49c3-99fb-22d76dbab2c8",
+   "id": "9a066800-c0e3-4bd5-8760-2da7e93a9b93",
    "name": "Sumar intento en transportistas",
    "type": "n8n-nodes-base.googleSheets",
    "typeVersion": 4.5,
@@ -379,11 +379,13 @@
      "attemptToConvertTypes": false,
      "convertFieldsToString": false
     },
-    "options": {}
+    "options": {
+     "cellFormat": "RAW"
+    }
    }
   },
   {
-   "id": "b26ae7e5-02ac-4859-a91f-120b60eec7bf",
+   "id": "983a1da7-0cb6-431e-bed7-7aafdca2a0ee",
    "name": "Mostrar error de identidad",
    "type": "n8n-nodes-base.form",
    "typeVersion": 1,
@@ -398,10 +400,10 @@
     "completionMessage": "={{ $('Validar y armar hechos').first().json.mensaje_final }}",
     "options": {}
    },
-   "webhookId": "371a049e-4c32-49c9-9681-f4176892ff69"
+   "webhookId": "b45272eb-f1ab-4b8f-b0d5-fa552baf3b28"
   },
   {
-   "id": "dc5806f9-e0d7-4013-8ccf-2421abe6c9a9",
+   "id": "979e5982-35da-4888-a41d-ed9e2c9415ac",
    "name": "Entender y redactar",
    "type": "@n8n/n8n-nodes-langchain.chainLlm",
    "typeVersion": 1.7,
@@ -427,7 +429,7 @@
    "onError": "continueRegularOutput"
   },
   {
-   "id": "442781f7-fd0d-4798-8366-66b16bc8e3ec",
+   "id": "66309002-d9b0-4171-9d16-0ed4032ce418",
    "name": "Gemini (formulario)",
    "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
    "typeVersion": 1,
@@ -444,7 +446,7 @@
    }
   },
   {
-   "id": "c5452fc2-eed7-4722-9a4a-1da46a8985f6",
+   "id": "b955e511-0102-4a17-b3ec-e58506a97eea",
    "name": "Controlar y completar",
    "type": "n8n-nodes-base.code",
    "typeVersion": 2,
@@ -457,7 +459,7 @@
    }
   },
   {
-   "id": "13468296-46c6-4d28-b0e1-a6140e927032",
+   "id": "b08a1f1d-2552-4b73-9cf8-b46ccefe108f",
    "name": "¿Es un reclamo nuevo?",
    "type": "n8n-nodes-base.if",
    "typeVersion": 2.2,
@@ -475,7 +477,7 @@
      },
      "conditions": [
       {
-       "id": "5d55346a-a789-4db4-843d-800d7f7c4d55",
+       "id": "84e29d30-3535-4f75-bd79-722c0180f222",
        "leftValue": "={{ $json.reclamo_nuevo }}",
        "rightValue": true,
        "operator": {
@@ -491,7 +493,7 @@
    }
   },
   {
-   "id": "e18dd309-d7f2-4adb-bd61-6d2795a60e41",
+   "id": "2b7c5e5f-4931-47a6-8f40-966f374184eb",
    "name": "Armar reclamo",
    "type": "n8n-nodes-base.set",
    "typeVersion": 3.4,
@@ -503,73 +505,73 @@
     "assignments": {
      "assignments": [
       {
-       "id": "c1a55240-1e55-4f0f-9887-1bb39ea04ad7",
+       "id": "1c6713ef-cd47-429d-adb6-13ed8441a47b",
        "name": "id_reclamo",
        "type": "string",
        "value": "={{ $json.id_reclamo }}"
       },
       {
-       "id": "1642f815-3f01-4c03-86e8-9fa8da985961",
+       "id": "7ad0e8a5-f828-4808-a6ef-9ad5ce5e9615",
        "name": "fecha_alta",
        "type": "string",
        "value": "={{ $json.hoy }}"
       },
       {
-       "id": "8c8f0cf9-3b04-424d-8705-4027039cc9b1",
+       "id": "1e0fa053-733e-4d2c-89ee-cef38df21de2",
        "name": "canal",
        "type": "string",
        "value": "Formulario"
       },
       {
-       "id": "e832c0ff-6df7-44e9-b71d-e7e05a7ccad4",
+       "id": "a51e4943-3406-45bc-9288-b01283bdbbaf",
        "name": "tipo",
        "type": "string",
        "value": "={{ $json.tipo_final }}"
       },
       {
-       "id": "1f126b25-0387-41db-bb04-4c89688a3dcb",
+       "id": "a6f16185-c2d7-4104-a848-12e6de55e855",
        "name": "telefono",
        "type": "string",
        "value": ""
       },
       {
-       "id": "244d2d43-68cd-4f2f-b960-4dd3b20cd6c2",
+       "id": "d930cf11-727c-4b65-bfe2-8c88c0409442",
        "name": "id_transportista",
        "type": "string",
        "value": "={{ $json.id_transportista }}"
       },
       {
-       "id": "0db70805-521d-4952-9f7e-11af24d50970",
+       "id": "89f712b7-a0b2-4600-bf63-34612da3400a",
        "name": "cuit",
        "type": "string",
        "value": "={{ $json.cuit }}"
       },
       {
-       "id": "53c952c1-19be-4734-8762-3f348e818525",
+       "id": "084710bc-7718-461c-a482-f9fa027ee14b",
        "name": "nro_comprobante",
        "type": "string",
        "value": "={{ $json.hechos.comprobante }}"
       },
       {
-       "id": "5938739a-7705-4e80-b8a5-7f904f4339ca",
+       "id": "bfed0e32-db41-43f5-a93c-a9def33c69c4",
        "name": "remito_ctg",
        "type": "string",
        "value": "={{ $json.remito_ctg }}"
       },
       {
-       "id": "83748cf1-4db4-4306-9188-d04775b58e5e",
+       "id": "ee5b4935-9a1d-49c6-9c8c-f8f1f316a585",
        "name": "id_factura",
        "type": "string",
        "value": "={{ $json.id_factura }}"
       },
       {
-       "id": "0302095e-862f-4917-b078-6f86a3c55b75",
+       "id": "93ab36c0-e528-4a50-88c0-f389646bfb0e",
        "name": "detalle",
        "type": "string",
        "value": "={{ $json.detalle.slice(0, 300) }}"
       },
       {
-       "id": "86d0fcd0-8156-4392-a98e-ddf510399ed6",
+       "id": "d43f06cf-199e-437d-b345-4f84d860dcc8",
        "name": "estado",
        "type": "string",
        "value": "Abierto"
@@ -580,7 +582,7 @@
    }
   },
   {
-   "id": "00ee7cb4-28e4-46d3-b755-c4fb9f75f4cf",
+   "id": "7851ba11-8abd-4e64-842c-8134bda6694a",
    "name": "Registrar reclamo",
    "type": "n8n-nodes-base.googleSheets",
    "typeVersion": 4.5,
@@ -608,11 +610,13 @@
      "attemptToConvertTypes": false,
      "convertFieldsToString": false
     },
-    "options": {}
+    "options": {
+     "cellFormat": "RAW"
+    }
    }
   },
   {
-   "id": "6290c4f1-7d49-4a1a-abda-80b643ba9f19",
+   "id": "e5a76a98-0594-4931-9011-bf2730335609",
    "name": "Avisar reclamo al analista",
    "type": "n8n-nodes-base.gmail",
    "typeVersion": 2.1,
@@ -623,16 +627,16 @@
    "parameters": {
     "sendTo": "={{ $('Leer parámetros').all().find(i => i.json.parametro === 'mail_analista')?.json.valor }}",
     "subject": "=[Formulario] Reclamo {{ $('Controlar y completar').first().json.id_reclamo }} · comprobante {{ $('Controlar y completar').first().json.hechos.comprobante }}",
-    "emailType": "html",
-    "message": "=<p>Entró un reclamo por el formulario web.</p><ul><li><b>Reclamo:</b> {{ $('Controlar y completar').first().json.id_reclamo }} ({{ $('Controlar y completar').first().json.tipo_final }}, urgencia {{ $('Controlar y completar').first().json.urgencia || 'sin dato' }})</li><li><b>Transportista:</b> {{ $('Controlar y completar').first().json.razon_social }}</li><li><b>Comprobante:</b> {{ $('Controlar y completar').first().json.hechos.comprobante }}</li><li><b>Detalle:</b> {{ $('Controlar y completar').first().json.detalle }}</li><li><b>Lo que vio en pantalla:</b> {{ $('Controlar y completar').first().json.mensaje_final }}</li></ul><p>El detector diario lo engancha al caso de la factura, si lo tiene.</p>",
+    "emailType": "text",
+    "message": "=Entró un reclamo por el formulario web.\n\nReclamo: {{ $('Controlar y completar').first().json.id_reclamo }} ({{ $('Controlar y completar').first().json.tipo_final }}, urgencia {{ $('Controlar y completar').first().json.urgencia || 'sin dato' }})\nTransportista: {{ $('Controlar y completar').first().json.razon_social }}\nComprobante: {{ $('Controlar y completar').first().json.hechos.comprobante }}\nDetalle: {{ $('Controlar y completar').first().json.detalle }}\nLo que vio en pantalla: {{ $('Controlar y completar').first().json.mensaje_final }}\n\nEl detector diario lo engancha al caso de la factura, si lo tiene.",
     "options": {
      "appendAttribution": false
     }
    },
-   "webhookId": "9f3d4c39-6ff9-4b61-9179-de60de2c29ac"
+   "webhookId": "03ff6b65-4a2e-4256-bffa-31e9af9c8a0d"
   },
   {
-   "id": "e39351f3-0b95-4c49-8561-f68c0b54f45a",
+   "id": "c289c681-f89e-4bcd-a5e3-552266826cee",
    "name": "Armar fila del log",
    "type": "n8n-nodes-base.set",
    "typeVersion": 3.4,
@@ -644,67 +648,67 @@
     "assignments": {
      "assignments": [
       {
-       "id": "dd50846a-0903-4e31-af46-6449518c1c8a",
+       "id": "237b6ef1-c0f8-46cc-8171-335eecb60425",
        "name": "fecha_hora",
        "type": "string",
        "value": "={{ $now.setZone('America/Argentina/Buenos_Aires').toFormat('yyyy-MM-dd HH:mm:ss') }}"
       },
       {
-       "id": "6face201-4849-4f7b-a14d-2222d91d503d",
+       "id": "46af1945-b9a9-4af8-9f94-536d0741c9d1",
        "name": "canal",
        "type": "string",
        "value": "Formulario"
       },
       {
-       "id": "bc080d3e-1311-4f26-b989-eae71c8a54a9",
+       "id": "e6cd867b-55be-418d-882e-39751c8525e6",
        "name": "message_id",
        "type": "string",
        "value": "={{ $execution.id }}"
       },
       {
-       "id": "76e20f37-8a46-41ac-8bb2-972eb9acf3cb",
+       "id": "9905af9e-21f0-4b38-971f-21a8738721d7",
        "name": "telefono",
        "type": "string",
        "value": ""
       },
       {
-       "id": "865f0991-8029-4227-9e7d-d73b4e14b450",
+       "id": "8e088be0-965f-49ae-b691-44348b1cc6ab",
        "name": "id_transportista",
        "type": "string",
        "value": "={{ $('Controlar y completar').first().json.id_transportista }}"
       },
       {
-       "id": "5b19370a-7d32-401a-8e12-93238dd67073",
+       "id": "b8959369-dc6a-4240-afe3-60515568527c",
        "name": "mensaje",
        "type": "string",
        "value": "={{ $('Controlar y completar').first().json.para_ia.detalle }}"
       },
       {
-       "id": "8f094a8c-df2c-4177-bf69-92c84e78ae6c",
+       "id": "3edb2add-d063-4d6c-a7e7-fa88c2446cb2",
        "name": "respuesta",
        "type": "string",
        "value": "={{ $('Controlar y completar').first().json.mensaje_final }}"
       },
       {
-       "id": "1e180d28-490e-49b2-b404-31733dda9495",
+       "id": "8ca4c8ed-0389-43da-8240-8e76d0fbb61d",
        "name": "accion",
        "type": "string",
        "value": "={{ $('Controlar y completar').first().json.es_reclamo ? 'reclamo ' + $('Controlar y completar').first().json.id_reclamo : 'consulta' }}"
       },
       {
-       "id": "f4902b6c-c1cc-4e16-a698-57d23cb1ec46",
+       "id": "0b1c2ff0-60f9-4d75-afc7-ce4df7926655",
        "name": "herramientas_usadas",
        "type": "string",
        "value": "={{ 'intencion: ' + $('Controlar y completar').first().json.intencion + ' · estado: ' + $('Controlar y completar').first().json.estado }}"
       },
       {
-       "id": "7dc7cd9a-526d-4e35-bfc6-e2cd23f8829f",
+       "id": "8c23159e-4687-4a49-8566-c102c9449b70",
        "name": "control_respuesta",
        "type": "string",
        "value": "={{ $('Controlar y completar').first().json.control_respuesta }}"
       },
       {
-       "id": "28e7cedb-52d4-48d0-8432-d0e3ca9cb1ec",
+       "id": "6f7b68ac-08a6-4841-863e-71130f33ae94",
        "name": "segundos_respuesta",
        "type": "string",
        "value": "={{ Math.round(($now.toMillis() - DateTime.fromISO($('Formulario').first().json.submittedAt).toMillis()) / 1000) }}"
@@ -715,7 +719,7 @@
    }
   },
   {
-   "id": "bceef32e-0b47-4cb4-8ed9-39a9ecc103e1",
+   "id": "33ea609e-2ed5-402f-9bca-f70b17cf241c",
    "name": "Registrar en el log",
    "type": "n8n-nodes-base.googleSheets",
    "typeVersion": 4.5,
@@ -743,11 +747,13 @@
      "attemptToConvertTypes": false,
      "convertFieldsToString": false
     },
-    "options": {}
+    "options": {
+     "cellFormat": "RAW"
+    }
    }
   },
   {
-   "id": "b9ddc0d8-04b1-40f4-8465-9159bf73f21b",
+   "id": "04f741df-a63e-444c-8f5c-dfd5e0a61b6a",
    "name": "Mostrar respuesta",
    "type": "n8n-nodes-base.form",
    "typeVersion": 1,
@@ -762,10 +768,10 @@
     "completionMessage": "={{ $('Controlar y completar').first().json.mensaje_final }}",
     "options": {}
    },
-   "webhookId": "010311c0-29eb-4d17-a18c-0e1010bd34d9"
+   "webhookId": "7ed0ada4-d9a7-405a-b51b-91572595313f"
   },
   {
-   "id": "6a4e4263-59f0-4f59-a6a9-c008eed88649",
+   "id": "dad9ee73-83d1-47d2-b443-526aa9f22cff",
    "name": "Nota 25",
    "type": "n8n-nodes-base.stickyNote",
    "typeVersion": 1,
@@ -781,7 +787,7 @@
    }
   },
   {
-   "id": "5a482c8d-76a7-48b0-802e-97b881187da5",
+   "id": "c9bd2f96-b6bf-48c0-9d77-f8706055b637",
    "name": "Nota 26",
    "type": "n8n-nodes-base.stickyNote",
    "typeVersion": 1,
@@ -797,7 +803,7 @@
    }
   },
   {
-   "id": "141836bc-42bc-41a6-ae1f-840574d3ed4d",
+   "id": "6ede2995-effb-45b9-87e5-cb9be59f0c9a",
    "name": "Nota 27",
    "type": "n8n-nodes-base.stickyNote",
    "typeVersion": 1,
