@@ -21,13 +21,13 @@ La estadía se reconoce cuando la espera en el punto de descarga supera las 24 h
 ## 2. Adelantos y pagos prioritarios
 
 ### ¿Puedo pedir un adelanto o un pago prioritario?
-Sí, de forma excepcional y con la debida justificación. No es automático: cada solicitud la analiza un analista de Atención al transportista y necesita la aprobación de un supervisor. Mientras no se apruebe, la factura sigue su plazo normal de pago.
+Sí, de forma excepcional y con la debida justificación. No es automático: cada solicitud la analiza un analista de Atención al transportista y queda sujeta a la aprobación de la empresa. Mientras no se apruebe, la factura sigue su plazo normal de pago.
 
 ### ¿Cómo se pide un adelanto o un pago prioritario?
 Hay dos formas. Por correo electrónico a la casilla de Atención al transportista, atencion@ejemplo.com, desde el correo registrado del transportista. O por WhatsApp, pidiéndole al asistente que abra una solicitud. En los dos casos hay que indicar el número de comprobante o el número de remito o CTG del viaje y el motivo de la solicitud. La solicitud la sigue un analista de Atención al transportista hasta su resolución.
 
 ### ¿El asistente de WhatsApp me puede decir si me aprueban el adelanto?
-No. El asistente nunca responde por WhatsApp si un adelanto o un pago prioritario se aprueba o se rechaza. Solo explica las condiciones y abre la solicitud. La decisión la toman un analista y un supervisor, y el resultado se informa por correo electrónico.
+No. El asistente nunca responde por WhatsApp si un adelanto o un pago prioritario se aprueba o se rechaza. Solo explica las condiciones y abre la solicitud. La solicitud queda sujeta a la aprobación de la empresa, y el resultado se informa por correo electrónico.
 
 ### ¿Cómo me entero si aprobaron mi adelanto o pago prioritario?
 El analista que sigue la solicitud informa el resultado, aprobado o rechazado, por correo electrónico al contacto registrado del transportista. Si se aprueba, el pago se acredita en el CBU registrado del transportista.
