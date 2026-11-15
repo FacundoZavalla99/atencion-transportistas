@@ -129,10 +129,10 @@ Las facturas siguen en Google Sheets y se consultan con herramientas; el RAG es 
 
 ```mermaid
 flowchart LR
-  subgraph "EF7 · Indexar (cuando cambia el documento)"
+  subgraph IDX["EF7 · Indexar, cuando cambia el documento"]
     D["Documento .md<br/>26 preguntas"] --> C["Cortar por pregunta<br/>+ metadatos"] --> E1["Embeddings<br/>Gemini"] --> S[("Supabase<br/>documents")]
   end
-  subgraph "EF1 · Responder (en cada consulta)"
+  subgraph RESP["EF1 · Responder, en cada consulta"]
     P["Pregunta del<br/>transportista"] --> A["AI Agent"] -- "buscar_politicas" --> E2["Embeddings<br/>Gemini"] --> M["match_documents<br/>similitud coseno"] --> F["4 fragmentos"] --> A --> K["Controlar respuesta"] --> W["WhatsApp"]
   end
   S -.-> M
